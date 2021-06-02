@@ -1,0 +1,2 @@
+class WhatWentWell < ApplicationRecord
+end

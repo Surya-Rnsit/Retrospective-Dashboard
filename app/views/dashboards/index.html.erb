@@ -1,0 +1,24 @@
+<center><h1>Retrospective Dashboard</h1></center>
+<h1>What went Well? </h1>  
+
+<%= form_with @wentwell do |form| %>
+  <div>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+<ul>
+  <% @well.each do |well| %>
+    <li>
+      <%= well.body %>
+    </li>
+  <% end %>
+</ul>
+<br>
+<br>
