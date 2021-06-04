@@ -1,0 +1,23 @@
+<div class="col-sm">
+        <h2>What went Wrong? </h2> 
+      <%= form_with url: "/createWhatWentWrong" do |form| %>
+        <div>
+          <%= form.text_area :body %>
+        </div>
+        <div>
+          <%= form.submit %>
+        </div>
+      <% end %>
+      <ul>
+        <% @wrong.each do |wrong| %>
+          <li>
+            <%= wrong.body %> <br>
+            <form method="post" action="/dashboards/destroyWhatWentWrong/<%=wrong.id%>" style='display: inline'>
+              <input class="btn btn-danger" type="submit" value="Delete" />
+            </form>
+          </li>
+        <% end %>
+      </ul>
+      <br>
+      <br>
+    </div>

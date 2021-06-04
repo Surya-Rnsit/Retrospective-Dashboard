@@ -1,0 +1,21 @@
+<div class="col-sm">
+      <h2>How Can We Improve?</h2> 
+      <%= form_with url: "/createImprovements" do |form| %>
+        <div>
+          <%= form.text_area :body %>
+        </div>
+        <div>
+          <%= form.submit %>
+        </div>
+        <% end %>
+        <ul>
+          <% @improve.each do |improve| %>
+            <li>
+              <%= improve.body %><br>
+              <form  method="post" action="/dashboards/destroyImprovements/<%=improve.id%>" style='display: inline'>
+              <input class="btn btn-danger" type="submit" value="Delete" />
+            </form>
+            </li>
+          <% end %>
+        </ul>
+    </div>
