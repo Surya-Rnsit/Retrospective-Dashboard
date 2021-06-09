@@ -1,0 +1,59 @@
+<div class="col-sm">
+    <h2>ActionsList?</h2>
+    <%= form_with url: "/createActionitems" do |form| %>
+    <div>
+        <%= form.text_area :body %>
+    </div>
+    <div>
+        <%= form.submit %>
+    </div>
+    <% end %>
+    <br>
+
+    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+        <div class="card-body">
+            <% @action.each do |action| %>
+                <%= check_box_tag 'Action_ids[#{action.id}]',action.id %>
+                <%=action.body%><br>
+
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ActionItems<%= action.id%>">
+                <i class="fa fa-edit"> </i>
+            </button>
+            <div class="modal" id="ActionItems<%= action.id%>">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body" class="form-outline">
+                            <form method="patch" action="/dashboards/updateactionitems/<%=action.id%>">
+                                <textarea class="form-control" id="body" name="body"><%= action.body %></textarea>
+                                <br />
+                                <input class="btn btn-primary btn-sm" type="submit" value="Update Post" />
+                            </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <form method="post" action="/dashboards/destroyactionitems/<%=action.id%>" style='display: inline'>
+                <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
+            </form>
+            </li>
+            <br>
+            <% end %>
+        </div>
+    </div>
+</div>
+

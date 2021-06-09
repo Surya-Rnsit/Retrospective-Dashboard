@@ -1,21 +1,56 @@
 <div class="col-sm">
-      <h2>How Can We Improve?</h2> 
-      <%= form_with url: "/createImprovements" do |form| %>
-        <div>
-          <%= form.text_area :body %>
-        </div>
-        <div>
-          <%= form.submit %>
-        </div>
-        <% end %>
-        <ul>
-          <% @improve.each do |improve| %>
-            <li>
-              <%= improve.body %><br>
-              <form  method="post" action="/dashboards/destroyImprovements/<%=improve.id%>" style='display: inline'>
-              <input class="btn btn-danger" type="submit" value="Delete" />
-            </form>
-            </li>
-          <% end %>
-        </ul>
+    <h2>How to Improve?</h2>
+    <%= form_with url: "/createImprovements"  do |form| %>
+    <div>
+        <%= form.text_area :body %>
     </div>
+    <div>
+        <%= form.submit %>
+    </div>
+    <% end %>
+    <br>
+    <% @improve.each do |improve| %>
+
+    <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+        <div class="card-body">
+            <p class="card-text"> <%= improve.body %><br></p>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Improvements<%= improve.id%>">
+                <i class="fa fa-edit"> </i>
+            </button>
+            <div class="modal" id="Improvements<%= improve.id%>">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body" class="form-outline">
+                            <form method="patch" action="/dashboards/updateImprovements/<%=improve.id%>">
+                                <textarea class="form-control" id="body" name="body"><%= improve.body %></textarea>
+                                <br />
+                                <input class="btn btn-primary btn-sm" type="submit" value="Update Post" />
+                            </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger " data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <form method="post" action="/dashboards/destroyImprovements/<%=improve.id%>" style='display: inline'>
+                <input class="btn btn-danger btn-sm " type="submit" value="Delete" />
+            </form>
+        </div>
+    </div>
+    <% end %>
+    </ul>
+</div>

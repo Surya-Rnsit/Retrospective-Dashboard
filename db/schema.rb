@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_02_052658) do
+ActiveRecord::Schema.define(version: 2021_06_07_102939) do
+
+  create_table "actionitems", force: :cascade do |t|
+    t.text "body"
+    t.boolean "ischeck", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "improvements", force: :cascade do |t|
     t.text "body"

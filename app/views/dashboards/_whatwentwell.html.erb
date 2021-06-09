@@ -1,52 +1,59 @@
- <div class="col-sm" >
-        <h2>What Went Well? </h2>  
-        <%= form_with url: "/createWhatWentWell" do |form| %>
-          <div>
-            <%= form.text_area :body%>
-          </div>
-          <div>
-            <%= form.submit %>
-          </div>
-        <% end %>
-        <ul>
-          <% @well.each do |well| %>
-            <li>
-              <%= well.body %><br>
-                    <button type="button" id ="<%=well.id%>" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Update
-                    </button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Please Update</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                               <form>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter Body" value="<%= well.body%>">
-                                    </div>
-                               </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
-                                <form method="patch" action="/dashboards/updateWhatWentWell/<%=well.id%>" style='display: inline'>
-                                    <input class="btn btn-primary" id="formGroupExampleInput" type="submit" value="update" />
-                                </form>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-              <form  method="post" action="/dashboards/destroyWhatWentWell/<%=well.id%>" style='display: inline'>
-              <input class="btn btn-danger" type="submit" value="Delete" />
-              </form>
-            </li>
-          <% end %>
-        </ul>
-        <br>
-        <br>
-    </div>
+ <div class="col-sm">
+     <h2>WhatWentWell?</h2>
+     <%= form_with url: "/createWhatWentWell" do |form| %>
+     <div>
+         <%= form.text_area :body%>
+     </div>
+     <div>
+         <%= form.submit %>
+     </div>
+     <% end %>
+     <br>
+     <% @well.each do |well| %>
+     <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+         <div class="card-body">
+             <p class="card-text"> <%= well.body %><br></p>
+         </div>
+         <div class="card-footer">
+             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#wentwellmodal<%= well.id%>">
+                 <i class="fa fa-edit"> </i>
+             </button>
+             <div class="modal" id="wentwellmodal<%= well.id%>">
+                 <div class="modal-dialog">
+                     <div class="modal-content">
+
+                         <!-- Modal Header -->
+                         <div class="modal-header">
+                             <h4 class="modal-title">Edit</h4>
+                             <button type="button" class="close" data-dismiss="modal">&times;</button>
+                         </div>
+
+                         <!-- Modal body -->
+                         <div class="modal-body" class="form-outline">
+                             <form method="patch" action="/dashboards/updateWhatWentWell/<%=well.id%>">
+                                 <textarea class="form-control" id="body" name="body"><%= well.body %></textarea>
+                                 <br />
+                                 <input class="btn btn-primary btn-sm" type="submit" value="Update Post" />
+                             </form>
+                         </div>
+
+                         <!-- Modal footer -->
+                         <div class="modal-footer">
+                             <button type="button" class="btn btn-danger " data-dismiss="modal">Close</button>
+                         </div>
+
+                     </div>
+                 </div>
+             </div>
+
+             <form method="post" action="/dashboards/destroyWhatWentWell/<%=well.id%>" style='display: inline'>
+                 <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
+             </form>
+         </div>
+     </div>
+
+     <% end %>
+     </ul>
+     <br>
+     <br>
+ </div>

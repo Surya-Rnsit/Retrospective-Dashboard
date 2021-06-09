@@ -1,23 +1,59 @@
 <div class="col-sm">
-        <h2>What went Wrong? </h2> 
-      <%= form_with url: "/createWhatWentWrong" do |form| %>
-        <div>
-          <%= form.text_area :body %>
-        </div>
-        <div>
-          <%= form.submit %>
-        </div>
-      <% end %>
-      <ul>
-        <% @wrong.each do |wrong| %>
-          <li>
-            <%= wrong.body %> <br>
-            <form method="post" action="/dashboards/destroyWhatWentWrong/<%=wrong.id%>" style='display: inline'>
-              <input class="btn btn-danger" type="submit" value="Delete" />
-            </form>
-          </li>
-        <% end %>
-      </ul>
-      <br>
-      <br>
+    <h2>WhatWentWrong?</h2>
+    <%= form_with url: "/createWhatWentWrong" do |form| %>
+    <div>
+        <%= form.text_area :body %>
     </div>
+    <div>
+        <%= form.submit %>
+    </div>
+    <% end %>
+    <br>
+    <% @wrong.each do |wrong| %>
+
+    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+        <div class="card-body">
+            <p class="card-text"> <%= wrong.body %><br></p>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#WentWrong<%= wrong.id%>">
+                <i class="fa fa-edit"> </i>
+            </button>
+            <div class="modal" id="WentWrong<%= wrong.id%>">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body" class="form-outline">
+                            <form method="patch" action="/dashboards/updateWhatWentWrong/<%=wrong.id%>">
+                                <textarea class="form-control" id="body" name="body"><%= wrong.body %></textarea>
+                                <br />
+                                <input class="btn btn-primary btn-sm" type="submit" value="Update Post" />
+                            </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger " data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <form method="post" action="/dashboards/destroyWhatWentWrong/<%=wrong.id%>" style='display: inline'>
+                <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
+            </form>
+        </div>
+    </div>
+
+    <% end %>
+
+    <br>
+    <br>
+</div>
