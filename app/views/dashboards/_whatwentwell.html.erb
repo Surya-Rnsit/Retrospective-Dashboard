@@ -1,16 +1,34 @@
  <div class="col-sm">
-     <h2>WhatWentWell?</h2>
-     <%= form_with url: "/createWhatWentWell" do |form| %>
-     <div>
-         <%= form.text_area :body%>
-     </div>
-     <div>
-         <%= form.submit %>
-     </div>
-     <% end %>
+     <h4>WhatWentWell <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createwell">Add</button></h4><br>
      <br>
+     <div class="modal fade" id="createwell" tabindex="-1" role="dialog" aria-labelledby="createwell" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h5 class="modal-title" id="createwell">Create</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                     </button>
+                 </div>
+                 <div class="modal-body">
+                     <%= form_with url: "/createWhatWentWell" do |form| %>
+                     <div>
+                         <%= form.text_area(:body,{:class => 'form-control'})%>
+                     </div>
+                     <br>
+                     <div>
+                         <%= form.submit({:class=> 'btn btn-primary'}) %>
+                     </div>
+                     <% end %>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                 </div>
+             </div>
+         </div>
+     </div>
      <% @well.each do |well| %>
-     <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
          <div class="card-body">
              <p class="card-text"> <%= well.body %><br></p>
          </div>
