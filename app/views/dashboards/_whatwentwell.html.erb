@@ -1,11 +1,11 @@
- <div class="col-sm">
-     <h4>WhatWentWell <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createwell">Add</button></h4><br>
+ <div class="col-sm-3">
+     <h4>What Went Well <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createwell">✚</button></h4><br>
      <br>
      <div class="modal fade" id="createwell" tabindex="-1" role="dialog" aria-labelledby="createwell" aria-hidden="true">
          <div class="modal-dialog" role="document">
              <div class="modal-content">
                  <div class="modal-header">
-                     <h5 class="modal-title" id="createwell">Create</h5>
+                     <h5 class="modal-title" id="createwell">Create WhatWentWell</h5>
                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                          <span aria-hidden="true">&times;</span>
                      </button>
@@ -19,10 +19,11 @@
                      <div>
                          <%= form.submit({:class=> 'btn btn-primary'}) %>
                      </div>
+                     <%= form.hidden_field :sprint_id, value: @sprint.id %>
                      <% end %>
                  </div>
                  <div class="modal-footer">
-                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                     <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
                  </div>
              </div>
          </div>
@@ -51,6 +52,7 @@
                              <form method="patch" action="/dashboards/updateWhatWentWell/<%=well.id%>">
                                  <textarea class="form-control" id="body" name="body"><%= well.body %></textarea>
                                  <br />
+                                 <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
                                  <input class="btn btn-primary btn-sm" type="submit" value="Update Post" />
                              </form>
                          </div>
@@ -65,13 +67,20 @@
              </div>
 
              <form method="post" action="/dashboards/destroyWhatWentWell/<%=well.id%>" style='display: inline'>
-                 <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
+                 <input class="btn btn-danger btn-sm" type="submit" data-confirm="Are you sure you want to delete?" value="Delete" />
+                 <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
              </form>
+
+             <form method="post" action="/dashboards/likeWhatWentWell/<%=well.id%>" style='display: inline'>
+                 <button class="btn  btn-dark btn-sm" type="submit"><i class="fa fa-thumbs-up"></i> <%=well.likes%></button>
+                 <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
+             </form>
+
          </div>
      </div>
 
      <% end %>
-     </ul>
+
      <br>
      <br>
  </div>

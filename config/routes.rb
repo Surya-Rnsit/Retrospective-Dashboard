@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root "dashboards#index"
-  get "/dashboards", to: "dashboards#index"
+  root "dashboards#show"
+  get "/dashboards/:id", to: "dashboards#index"
 
   post "/createWhatWentWell", to: "dashboards#createWhatWentWell"
   post "/createWhatWentWrong", to: "dashboards#createWhatWentWrong"
@@ -23,4 +23,13 @@ Rails.application.routes.draw do
 
   get "/dashboards/updateactionitems/:id" , to: "dashboards#updateActionitems"
   patch "/dashboards/updateactionitems/:id" , to: "dashboards#updateActionitems"
+  post "/dashboards/updatecheckbox/:id" , to: "dashboards#updatecheckbox"
+
+  post"/dashboards/likeWhatWentWell/:id" , to: "dashboards#likeWhatWentWell"
+  post"/dashboards/likeWhatWentWrong/:id" , to: "dashboards#likeWhatWentWrong"
+  post"/dashboards/likeImprovements/:id" , to: "dashboards#likeImprovements"
+
+  post"/createSprint" , to: "dashboards#createSprint"
+  post "dashboards/destroySprint/:id", to: "dashboards#destroySprint"
+  
 end

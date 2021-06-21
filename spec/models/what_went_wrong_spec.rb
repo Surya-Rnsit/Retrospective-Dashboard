@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe WhatWentWrong, :type => :model do
   subject {
+    @sprint=Sprint.create(id:1,name:"firstsprint")
     described_class.new(id:1,
                         body: "Anything",
+                        sprint_id: @sprint.id
                         )
   }
 

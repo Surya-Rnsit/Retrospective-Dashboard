@@ -1,11 +1,11 @@
-<div class="col-sm">
-    <h4>WhatWentWrong <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#createwrong">Add</button></h4><br>
+<div class="col-sm-3">
+    <h4>What Went Wrong <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createwrong">✚</button></h4><br>
 
     <div class="modal fade" id="createwrong" tabindex="-1" role="dialog" aria-labelledby="createwrong" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createwrong">Create</h5>
+                    <h5 class="modal-title" id="createwrong">Create WhatWentWrong</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -19,6 +19,7 @@
                     <div>
                         <%= form.submit({:class=> 'btn btn-primary'})  %>
                     </div>
+                    <%= form.hidden_field :sprint_id, value: @sprint.id %>
                     <% end %>
                     <br>
                 </div>
@@ -53,6 +54,7 @@
                             <form method="patch" action="/dashboards/updateWhatWentWrong/<%=wrong.id%>">
                                 <textarea class="form-control" id="body" name="body"><%= wrong.body %></textarea>
                                 <br />
+                                <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
                                 <input class="btn btn-primary btn-sm" type="submit" value="Update Post" />
                             </form>
                         </div>
@@ -66,7 +68,12 @@
                 </div>
             </div>
             <form method="post" action="/dashboards/destroyWhatWentWrong/<%=wrong.id%>" style='display: inline'>
-                <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
+                <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
+                <input class="btn btn-danger btn-sm" type="submit" data-confirm="Are you sure you want to delete?" value="Delete" />
+            </form>
+            <form method="post" action="/dashboards/likeWhatWentWrong/<%=wrong.id%>" style='display: inline'>
+                <button class="btn  btn-dark btn-sm" type="submit"><i class="fa fa-thumbs-up"></i> <%=wrong.likes%></button>
+                <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
             </form>
         </div>
     </div>

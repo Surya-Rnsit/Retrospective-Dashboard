@@ -15,4 +15,24 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
  
  @import "bootstrap";
- 
+ .card {
+    border-radius: 20px;
+    font-family: 'Handlee', 'Roboto', helvetica, cursive;
+  }
+  input[type=checkbox]:checked + label.form-check-label{
+    text-decoration: line-through;
+  }
+
+
+.dropdown .dropdown-menu 
+{
+  color: white;
+  background-color: #989898;
+  border-color: #b91773;
+}
+h1, h2, h3, h4, .sectionTitle {
+  margin: 0.2em 0;
+  font-family: 'Handlee', 'Roboto', helvetica, cursive;
+  font-weight: bold;
+}
+

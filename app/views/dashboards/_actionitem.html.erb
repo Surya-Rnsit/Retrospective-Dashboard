@@ -1,10 +1,10 @@
-<div class="col-sm">
-    <h4>Actions List <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createaction">Add</button></h4><br>
+<div class="col-sm-3">
+    <h4>Actions List <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createaction">✚</button></h4><br>
     <div class="modal fade" id="createaction" tabindex="-1" role="dialog" aria-labelledby="createaction" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createaction">Create</h5>
+                    <h5 class="modal-title" id="createaction">Create Actions List</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -16,8 +16,9 @@
                     </div>
                     <br>
                     <div>
-                        <%= form.submit({:class=> 'btn btn-primary'})  %>
+                        <%= form.submit({:class=> 'btn btn-primary'})%>
                     </div>
+                    <%= form.hidden_field :sprint_id, value: @sprint.id%>
                     <% end %>
                     <br>
                 </div>
@@ -28,12 +29,54 @@
         </div>
     </div>
     <br>
+    <% @action.each do |action| %>
     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
         <div class="card-body">
-            <% @action.each do |action| %>
-            <%= check_box_tag 'Action_ids[#{action.id}]',action.id %>
-            <%=action.body%><br>
+            <form method="post" action="/dashboards/updatecheckbox/<%=action.id%>" style='display: inline'>
+                <%if action.ischeck==true%>
+                <div class="form-check">
+                    <input class="form-check-input" onChange="this.form.submit()" type="checkbox" id="<%=action.id%>" checked>
+                    <label class="form-check-label" for="<%=action.id%>">
+                        <%=action.body%>
+                    </label>
+                    <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
+                </div>
+            </form>
+            <%else%>
+            <form method="post" action="/dashboards/updatecheckbox/<%=action.id%>" style='display: inline'>
+                <div class="form-check">
+                    <input class="form-check-input" onChange="this.form.submit()" type="checkbox" id="<%=action.id%>">
+                    <label class="form-check-label" for="<%=action.id%>">
+                        <%=action.body%>
+                    </label>
+                    <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
+                </div>
+            </form>
 
+            <div class="dropdown show">
+                <a class="btn btn-info dropdown-toggle btn-sm d-inline" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Move To
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                    <% @allsprints.each do |move_sprint| %>
+                     <%=puts("Hi hwllo how are you #{move_sprint.id}")%>
+                     <%move_sprint_id=move_sprint.id %>
+                    <form method="post" id="myForm" action="/dashboards/moveActionItems" style='display: inline'>
+                        <input type="hidden" id="moveto" name="moveto" value="<%=move_sprint_id%>">
+                        <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
+                        <%if move_sprint.id!=@sprint.id%>
+                            <a class="dropdown-item" role="button" onclick="myFunction()"><%=move_sprint.name%></a>
+                        <%end%>
+                    </form>
+                    <script>
+                        function myFunction() {
+                            document.getElementById("myForm").submit();
+                        }
+                    </script>
+                    <%end%>
+                </div>
+            </div>
+            <%end%>
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ActionItems<%= action.id%>">
                 <i class="fa fa-edit"> </i>
             </button>
@@ -52,6 +95,7 @@
                             <form method="patch" action="/dashboards/updateactionitems/<%=action.id%>">
                                 <textarea class="form-control" id="body" name="body"><%= action.body %></textarea>
                                 <br />
+                                <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
                                 <input class="btn btn-primary btn-sm" type="submit" value="Update Post" />
                             </form>
                         </div>
@@ -66,11 +110,10 @@
             </div>
 
             <form method="post" action="/dashboards/destroyactionitems/<%=action.id%>" style='display: inline'>
-                <input class="btn btn-danger btn-sm" type="submit" value="Delete" />
+                <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
+                <input class="btn btn-danger btn-sm" type="submit" data-confirm="Are you sure you want to delete?" value="Delete" /><br>
             </form>
-            </li>
-            <br>
-            <% end %>
         </div>
+        <% end %>
     </div>
 </div>

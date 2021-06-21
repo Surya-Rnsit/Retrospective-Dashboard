@@ -2,8 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Actionitem, :type => :model do
   subject {
+    @sprint=Sprint.create(id:1,name:"firstsprint")
     described_class.new(id:1,
                         body: "Anything",
+                        ischeck:"true",
+                        sprint_id: @sprint.id
                         )
   }
 
