@@ -1,6 +1,6 @@
 <body style="background-color:#C0C0C0;">
     <nav class="navbar navbar-light -lighbgt justify-content-start " style="background-color: #989898;">
-        <span class="navbar-brand mb-0 h1 navbar-brand" style="color:black"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> <a style="color:black" href="http://localhost:3000/"> Retrospective Dashboard</a></span>
+        <span class="navbar-brand mb-0 h1 navbar-brand" style="color:black"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> <a style="color:black" href="http://localhost:3000/"> <%= t 'Retrospective Dashboard'%></a></span>
         <div class="dropdown show">
             <a class="btn btn-danger dropdown-toggle " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <%=@sprint.name%>
@@ -10,18 +10,18 @@
                 <a class="dropdown-item" href="http://localhost:3000/dashboards/<%=sprint.id%>"><%=sprint.name%></a>
                 <form method="post" action="/dashboards/destroySprint/<%=sprint.id%>" style='display: inline'>
                     <div class="col text-center">
-                        <input class="btn btn-danger btn-sm" data-confirm="Are you sure you want to delete?" type="submit" value="Delete" />
+                        <input class="btn btn-danger btn-sm" data-confirm="Are you sure you want to delete?" type="submit" value="<%= t'Delete'%>" />
                     </div>
                 </form>
                 <%end%>
             </div>
         </div>
-        <button type="button" class="btn btn-success " data-toggle="modal" data-target="#createsprint">Add New Sprint</button>
+        <button type="button" class="btn btn-success " data-toggle="modal" data-target="#createsprint"><%= t 'Add New Sprint'%></button>
         <div class="modal fade" id="createsprint" tabindex="-1" role="dialog" aria-labelledby="createsprint" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createsprint">Add New Sprint</h5>
+                        <h5 class="modal-title" id="createsprint"><%= t 'Add New Sprint'%></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -39,24 +39,30 @@
                         <br>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t'Close'%></button>
                     </div>
                 </div>
             </div>
         </div>
+        <%= content_tag :button do %>
+        <%= link_to ' English', locale: :en%>
+        <%end unless current_page?(locale: :en) %>
+        <%= content_tag :button do %>
+        <%= link_to ' French', locale: :fr%>
+        <%end unless current_page?(locale: :fr) %>
     </nav>
     <br>
     <div class="container">
-
+    
         <div class="row">
+        
+            <%= render partial: "whatwentwell", locals: {lang: I18n.locale} %>
 
-            <%= render "whatwentwell"%>
+            <%= render partial: "whatwentwrong", locals: {lang: I18n.locale} %>
 
-            <%= render "whatwentwrong"%>
+            <%= render partial: "improvements", locals: {lang: I18n.locale} %>
 
-            <%= render "improvements"%>
-
-            <%= render "actionitem"%>
+            <%= render partial: "actionitem", locals: {lang: I18n.locale} %>
 
         </div>
 

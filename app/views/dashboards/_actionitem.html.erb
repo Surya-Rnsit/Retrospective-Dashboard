@@ -1,10 +1,10 @@
 <div class="col-sm-3">
-    <h4>Actions List <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createaction">✚</button></h4><br>
+    <h4><%= t 'Actions List'%> <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createaction">✚</button></h4><br>
     <div class="modal fade" id="createaction" tabindex="-1" role="dialog" aria-labelledby="createaction" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createaction">Create Actions List</h5>
+                    <h5 class="modal-title" id="createaction"><%= t 'Create Action List'%></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -19,11 +19,12 @@
                         <%= form.submit({:class=> 'btn btn-primary'})%>
                     </div>
                     <%= form.hidden_field :sprint_id, value: @sprint.id%>
+                    <%= form.hidden_field :locale, value: lang %>
                     <% end %>
                     <br>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t 'Close'%></button>
                 </div>
             </div>
         </div>
@@ -40,6 +41,7 @@
                         <%=action.body%>
                     </label>
                     <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
+                    <input type="hidden" id="locale" name="locale" value="<%=lang%>">
                 </div>
             </form>
             <%else%>
@@ -50,29 +52,25 @@
                         <%=action.body%>
                     </label>
                     <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
+                    <input type="hidden" id="locale" name="locale" value="<%=lang%>">
                 </div>
             </form>
 
             <div class="dropdown show">
                 <a class="btn btn-info dropdown-toggle btn-sm d-inline" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Move To
+                    <%= t 'Move To'%>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu">
                     <% @allsprints.each do |move_sprint| %>
-                     <%=puts("Hi hwllo how are you #{move_sprint.id}")%>
-                     <%move_sprint_id=move_sprint.id %>
-                    <form method="post" id="myForm" action="/dashboards/moveActionItems" style='display: inline'>
-                        <input type="hidden" id="moveto" name="moveto" value="<%=move_sprint_id%>">
+                    <form method="post" id="myForm<%=move_sprint.id%>" action="/dashboards/moveActionItems" style='display: inline'>
+                        <input type="hidden" id="moveto" name="moveto" value="<%=move_sprint.id %>">
                         <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
+                        <input type="hidden" id="action_id" name="action_id" value="<%=action.id%>">
+                        <input type="hidden" id="locale" name="locale" value="<%=lang%>">
                         <%if move_sprint.id!=@sprint.id%>
-                            <a class="dropdown-item" role="button" onclick="myFunction()"><%=move_sprint.name%></a>
+                        <button class="btn  btn-dark btn-sm dropdown-item" type="submit"><%=move_sprint.name%></button>
                         <%end%>
                     </form>
-                    <script>
-                        function myFunction() {
-                            document.getElementById("myForm").submit();
-                        }
-                    </script>
                     <%end%>
                 </div>
             </div>
@@ -86,7 +84,7 @@
 
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Edit</h4>
+                            <h4 class="modal-title"><%= t'Edit'%></h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
@@ -96,13 +94,14 @@
                                 <textarea class="form-control" id="body" name="body"><%= action.body %></textarea>
                                 <br />
                                 <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
-                                <input class="btn btn-primary btn-sm" type="submit" value="Update Post" />
+                                <input type="hidden" id="locale" name="locale" value="<%=lang%>">
+                                <input class="btn btn-primary btn-sm" type="submit" value="<%= t 'Update Post'%>" />
                             </form>
                         </div>
 
                         <!-- Modal footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t 'Close' %></button>
                         </div>
 
                     </div>
@@ -111,7 +110,8 @@
 
             <form method="post" action="/dashboards/destroyactionitems/<%=action.id%>" style='display: inline'>
                 <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
-                <input class="btn btn-danger btn-sm" type="submit" data-confirm="Are you sure you want to delete?" value="Delete" /><br>
+                <input type="hidden" id="locale" name="locale" value="<%=lang%>">
+                <input class="btn btn-danger btn-sm" type="submit" data-confirm="Are you sure you want to delete?" value="<%= t 'Delete'%>" /><br>
             </form>
         </div>
         <% end %>

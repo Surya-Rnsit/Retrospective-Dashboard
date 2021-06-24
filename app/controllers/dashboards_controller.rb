@@ -20,7 +20,7 @@ class DashboardsController < ApplicationController
     def createWhatWentWell
       @wentwell =WhatWentWell.new(body: params[:body],sprint_id:params[:sprint_id])  
       if @wentwell.save
-        redirect_to 'http://localhost:3000/dashboards/'+ @wentwell.sprint_id.to_s
+        redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ @wentwell.sprint_id.to_s
       else
           render(json: {
             message: 'createWhatWentWell not created(length of body should be more than 5)'
@@ -33,7 +33,7 @@ class DashboardsController < ApplicationController
       if WhatWentWell.exists?(:id => params[:id])
         @editWell=WhatWentWell.find(params[:id])
         @editWell.update(body: params[:body])
-        redirect_to 'http://localhost:3000/dashboards/'+ params[:sprint_id].to_s
+        redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ params[:sprint_id].to_s
       else  
         render(json: {
           message: 'Record with this id is not found'
@@ -46,7 +46,7 @@ class DashboardsController < ApplicationController
     def destroyWhatWentWell
       @destroywell = WhatWentWell.find(params[:id])
       @destroywell.destroy
-      redirect_to 'http://localhost:3000/dashboards/'+ params[:sprint_id].to_s
+      redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ params[:sprint_id].to_s
     end
     
     
@@ -54,7 +54,7 @@ class DashboardsController < ApplicationController
     def createWhatWentWrong
       @wentwrong = WhatWentWrong.new(body: params[:body],sprint_id:params[:sprint_id])  
       if @wentwrong.save
-        redirect_to 'http://localhost:3000/dashboards/'+ @wentwrong.sprint_id.to_s
+        redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ @wentwrong.sprint_id.to_s
       else
         render(json: {
           message: 'createWhatWentWrong not created(length of body should be more than 5)'
@@ -68,7 +68,7 @@ class DashboardsController < ApplicationController
       if WhatWentWrong.exists?(:id => params[:id])
         @updatewrong=WhatWentWrong.find(params[:id])
         @updatewrong.update(body: params[:body])
-        redirect_to 'http://localhost:3000/dashboards/'+ params[:sprint_id].to_s
+        redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ params[:sprint_id].to_s
       else  
         render(json: {
           message: 'Record with this id is not found'
@@ -81,7 +81,7 @@ class DashboardsController < ApplicationController
     def destroyWhatWentWrong
       @destroywrong = WhatWentWrong.find(params[:id])
       @destroywrong.destroy
-      redirect_to 'http://localhost:3000/dashboards/'+ params[:sprint_id].to_s
+      redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ params[:sprint_id].to_s
     end
 
 
@@ -89,7 +89,7 @@ class DashboardsController < ApplicationController
     def createImprovements
       @improve = Improvement.new(body: params[:body],sprint_id:params[:sprint_id])  
       if @improve.save
-        redirect_to 'http://localhost:3000/dashboards/'+ @improve.sprint_id.to_s
+        redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ @improve.sprint_id.to_s
       else
         render(json: {
           message: 'Improvements not created(length of body should be more than 5)'
@@ -103,7 +103,7 @@ class DashboardsController < ApplicationController
       if Improvement.exists?(:id => params[:id])
         @updateImprovements=Improvement.find(params[:id])
         @updateImprovements.update(body: params[:body])
-        redirect_to 'http://localhost:3000/dashboards/'+ params[:sprint_id].to_s
+        redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ params[:sprint_id].to_s
       else  
         render(json: {
           message: 'Record with this id is not found'
@@ -116,7 +116,7 @@ class DashboardsController < ApplicationController
     def destroyImprovements
       @destroywell = Improvement.find(params[:id])
       @destroywell.destroy
-      redirect_to 'http://localhost:3000/dashboards/'+ params[:sprint_id].to_s
+      redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ params[:sprint_id].to_s
     end
 
     
@@ -124,7 +124,7 @@ class DashboardsController < ApplicationController
     def createActionitems
       @Actionitem = Actionitem.new(body: params[:body],sprint_id:params[:sprint_id])  
       if @Actionitem.save
-        redirect_to 'http://localhost:3000/dashboards/'+ @Actionitem.sprint_id.to_s
+        redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ @Actionitem.sprint_id.to_s
       else
         render(json: {
           message: 'createActionitems not created'
@@ -137,7 +137,7 @@ class DashboardsController < ApplicationController
       if Actionitem.exists?(:id => params[:id])
         @actionitem=Actionitem.find(params[:id])
         @actionitem.update(body: params[:body])
-        redirect_to 'http://localhost:3000/dashboards/'+ params[:sprint_id].to_s
+        redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ params[:sprint_id].to_s
       else  
         render(json: {
           message: 'Record with this id is not found'
@@ -153,7 +153,7 @@ class DashboardsController < ApplicationController
       else
         @actionitem.update(ischeck: true)
       end
-      redirect_to 'http://localhost:3000/dashboards/'+ params[:sprint_id].to_s
+      redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ params[:sprint_id].to_s
     end
 
 
@@ -161,35 +161,40 @@ class DashboardsController < ApplicationController
     def destroyactionitems
       @actionitem = Actionitem.find(params[:id])
       @actionitem.destroy
-      redirect_to 'http://localhost:3000/dashboards/'+ params[:sprint_id].to_s
+      redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ params[:sprint_id].to_s
     end
 
 
     def likeWhatWentWell
       @well = WhatWentWell.find(params[:id])
       @well.update_attributes(likes: @well.likes + 1)
-      redirect_to 'http://localhost:3000/dashboards/'+ params[:sprint_id].to_s
+      redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+params[:sprint_id].to_s
     end
 
 
     def likeWhatWentWrong
       @wrong= WhatWentWrong.find(params[:id])
       @wrong.update_attributes(likes: @wrong.likes + 1)
-      redirect_to 'http://localhost:3000/dashboards/'+ params[:sprint_id].to_s
+      redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ params[:sprint_id].to_s
     end
 
 
     def likeImprovements
       @improve= Improvement.find(params[:id])
       @improve.update_attributes(likes: @improve.likes + 1)
-      redirect_to 'http://localhost:3000/dashboards/'+ params[:sprint_id].to_s
+      redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ params[:sprint_id].to_s
     end
 
 
     def createSprint
       @sprint = Sprint.new(name: params[:name])  
-      @sprint.save
-      redirect_to 'http://localhost:3000/dashboards/'+ @sprint.id.to_s
+      if @sprint.save
+         redirect_to 'http://localhost:3000/dashboards/'+ @sprint.id.to_s
+      else
+         render(json: {
+          message: 'Sprint Already Exists or Sprint not created'
+        }) && return
+      end
     end
 
 
@@ -197,6 +202,19 @@ class DashboardsController < ApplicationController
       @sprint = Sprint.find(params[:id])
       @sprint.destroy
       redirect_to 'http://localhost:3000'
+    end
+
+
+    def moveActionItems
+      @currentSprint=Sprint.find(params[:sprint_id])
+      @destinationSprint=Sprint.find(params[:moveto])
+      @actionToMove=@currentSprint.actionitems.find(params[:action_id])
+
+      @newItem = Actionitem.new(body: @actionToMove.body ,sprint_id: @destinationSprint.id)  
+      @newItem.save
+
+      @actionToMove.destroy
+      redirect_to 'http://localhost:3000/'+params[:locale]+'/dashboards/'+ params[:sprint_id].to_s
     end
 
 end

@@ -1,10 +1,10 @@
 <div class="col-sm-3">
-    <h4>How to Improve? <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createimprove">✚</button></h4><br>
+    <h4><%= t 'How to Improve?'%> <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createimprove">✚</button></h4><br>
     <div class="modal fade" id="createimprove" tabindex="-1" role="dialog" aria-labelledby="createimprove" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createimprove">Create Improvements</h5>
+                    <h5 class="modal-title" id="createimprove"><%= t 'Create Improvements'%></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -19,11 +19,12 @@
                         <%= form.submit({:class=> 'btn btn-primary'})  %>
                     </div>
                     <%= form.hidden_field :sprint_id, value: @sprint.id %>
+                    <input type="hidden" id="locale" name="locale" value="<%=lang%>">
                     <% end %>
                     <br>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t'Close'%></button>
                 </div>
             </div>
         </div>
@@ -45,7 +46,7 @@
 
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Edit</h4>
+                            <h4 class="modal-title"><%= t'Edit'%></h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
@@ -55,13 +56,14 @@
                                 <textarea class="form-control" id="body" name="body"><%= improve.body %></textarea>
                                 <br />
                                 <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
-                                <input class="btn btn-primary btn-sm" type="submit" value="Update Post" />
+                                <input type="hidden" id="locale" name="locale" value="<%=lang%>">
+                                <input class="btn btn-primary btn-sm" type="submit" value="<%= t 'Update Post'%>" />
                             </form>
                         </div>
 
                         <!-- Modal footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger " data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger " data-dismiss="modal"><%= t'Close'%></button>
                         </div>
 
                     </div>
@@ -69,10 +71,12 @@
             </div>
             <form method="post" action="/dashboards/destroyImprovements/<%=improve.id%>" style='display: inline'>
                 <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
-                <input class="btn btn-danger btn-sm " type="submit" data-confirm="Are you sure you want to delete?" value="Delete" />
+                <input type="hidden" id="locale" name="locale" value="<%=lang%>">
+                <input class="btn btn-danger btn-sm " type="submit" data-confirm="Are you sure you want to delete?" value="<%= t 'Delete'%>" />
             </form>
             <form method="post" action="/dashboards/likeImprovements/<%=improve.id%>" style='display: inline'>
                 <button class="btn  btn-dark btn-sm" type="submit"><i class="fa fa-thumbs-up"></i> <%=improve.likes%></button>
+                <input type="hidden" id="locale" name="locale" value="<%=lang%>">
                 <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
             </form>
         </div>
