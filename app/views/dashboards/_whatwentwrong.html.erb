@@ -31,7 +31,8 @@
         </div>
     </div>
     <br>
-    <% @wrong.each do |wrong| %>
+    <%=@wrong.each do |w|%>
+    <%= w.what_went_wrongs.each do |wrong| %>
     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
         <div class="card-body">
             <p class="card-text"> <%= wrong.body %><br></p>
@@ -82,6 +83,7 @@
         </div>
     </div>
 
+    <% end %>
     <% end %>
 
     <br>

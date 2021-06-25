@@ -1,0 +1,98 @@
+require: 
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+    - 'spec/**/*'
+    - 'test/**/*'
+    
+Metrics/BlockLength:
+  Exclude:
+    - config/**/*
+    - spec/**/*
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/**/*
+
+  # ------------------------------------------------------- Rails --------------------------------------------------------
+# Checks for methods which delegate to other methods without using rails' builtin of the same name. Example:
+# def a
+#   b.a
+# end
+# could be
+# delegate :a, to: :b
+# Not enforced.
+Rails/Delegate:
+  Enabled: false
+
+# ------------------------------------------------------- Style --------------------------------------------------------
+# Forces the use of the shortcut %() for single-line strings with interpolation and double quotes.
+# Not enforced.
+Style/BarePercentLiterals:
+  Enabled: false
+# Always use {} for single line blocks and do..end for multi-line blocks
+Style/BlockDelimiters:
+  EnforcedStyle: line_count_based
+# There are two styles for defining class/module hierarchies
+# class Alpha
+#   class Beta
+#   end
+# end
+#
+# class Alpha::Beta
+# end
+#
+# Allow both (not enforced).
+Style/ClassAndModuleChildren:
+  Enabled: false
+# Forces consistent use of is_a? vs kind_of?
+# Not enforced.
+Style/ClassCheck:
+  Enabled: false
+# Document classes and non-namespace modules. Not enforced.
+Style/Documentation:
+  Enabled: false
+# Disallows !!variable to convert variable to a boolean
+# Not enforced.
+Style/DoubleNegation:
+  Enabled: false
+# Checks that empty method definitions have 'end' on a separate line.
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+# Disallows guard clauses.
+# Not enforced because it conflicts with removing Style/MultilineIfModifier.
+Style/GuardClause:
+  Enabled: false
+# Disallows trailing comments on any line with code in it.
+# Not enforced.
+Style/InlineComment:
+  Enabled: false
+# Favor unless over if for negative conditions (or control flow or). Not enforced.
+Style/NegatedIf:
+  Enabled: false
+# Checks that the next keyword is used rather than a condition to skip the body of a loop
+# Not enforced.
+Style/Next:
+  Enabled: false
+# Uses slashes for single-line regexes, and %r for multiline regexes or regexes with inner slashes.
+Style/RegexpLiteral:
+  EnforcedStyle: mixed
+# Always use 'raise' command, never 'fail'
+Style/SignalException:
+  EnforcedStyle: only_raise
+# Use symbols as procs whenever possible. Instead of
+# arr.map { |x| x.id }
+# use
+# arr.map(&:id)
+# Not enforced.
+Style/SymbolProc:
+  Enabled: false
+# Use %w or %W for arrays of words. Not enforced.
+Style/WordArray:
+  Enabled: false
+  EnforcedStyle: percent

@@ -30,7 +30,8 @@
         </div>
     </div>
     <br>
-    <% @action.each do |action| %>
+    <%=@improve.each do |w|%>
+    <%= w.actionitems.each do |action| %>
     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
         <div class="card-body">
             <form method="post" action="/dashboards/updatecheckbox/<%=action.id%>" style='display: inline'>
@@ -114,6 +115,7 @@
                 <input class="btn btn-danger btn-sm" type="submit" data-confirm="Are you sure you want to delete?" value="<%= t 'Delete'%>" /><br>
             </form>
         </div>
+        <% end %>
         <% end %>
     </div>
 </div>

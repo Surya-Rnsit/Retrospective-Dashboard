@@ -24,12 +24,13 @@
                      <% end %>
                  </div>
                  <div class="modal-footer">
-                     <button type="button" class="btn btn-danger"  data-dismiss="modal"><%= t 'Close'%></button>
+                     <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t 'Close'%></button>
                  </div>
              </div>
          </div>
      </div>
-     <% @well.each do |well| %>
+     <%=@well.each do |w|%>
+     <%=w.what_went_wells.each do |well| %>
      <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
          <div class="card-body">
              <p class="card-text"> <%= well.body %><br></p>
@@ -82,8 +83,8 @@
 
          </div>
      </div>
-
      <% end %>
+     <%end%>
 
      <br>
      <br>

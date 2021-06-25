@@ -1,13 +1,13 @@
 <body style="background-color:#C0C0C0;">
     <nav class="navbar navbar-light -lighbgt justify-content-start " style="background-color: #989898;">
-        <span class="navbar-brand mb-0 h1 navbar-brand" style="color:black"><i class="fa fa-calendar-check-o" aria-hidden="true"></i><a style="color:black" href="http://localhost:3000/"> <%= t 'Retrospective Dashboard'%></a></span>
+        <span class="navbar-brand mb-0 h1 navbar-brand" style="color:black"><i class="fa fa-calendar-check-o" aria-hidden="true"></i><a style="color:black" href="<%=root_path%>"> <%= t 'Retrospective Dashboard'%></a></span>
         <div class="dropdown show">
-            <a class="btn btn-danger dropdown-toggle " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="btn btn-danger dropdown-toggle mr-2 " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                <%= t 'All Sprints' %>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <% @allsprints.each do |sprint| %>
-                <a class="dropdown-item" href="http://localhost:3000/dashboards/<%=sprint.id%>"><%=sprint.name%></a>
+                <a class="dropdown-item" href="<%=root_path%>/dashboards/<%=sprint.id%>"><%=sprint.name%></a>
 
                 <form method="post" action="/dashboards/destroySprint/<%=sprint.id%>" style='display: inline'>
                     <div class="col text-center">
@@ -17,7 +17,7 @@
                 <%end%>
             </div>
         </div>
-        <button type="button" class="btn btn-success " data-toggle="modal" data-target="#createsprint"><%= t 'Add New Sprint'%> </button>
+        <button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#createsprint"><%= t 'Add New Sprint'%> </button>
         <div class="modal fade" id="createsprint" tabindex="-1" role="dialog" aria-labelledby="createsprint" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
