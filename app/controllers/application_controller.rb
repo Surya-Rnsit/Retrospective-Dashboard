@@ -1,7 +1,9 @@
-# frozen_string_literal: true
-
 class ApplicationController < ActionController::Base
   before_action :set_locale
+
+  # This to to prevent forgery protection system.
+  # If you have controllers that are meant to be called by external parties you should disable forgery protection.
+  skip_before_action :verify_authenticity_token
 
   private
 

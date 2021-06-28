@@ -16,9 +16,9 @@ rvm install 3.0.1
 rvm use 3.0.1 --default
 ruby -v
 
-Install bundler by running gem install bundler
+Install bundler by running - gem install bundler
 
-Install NodeJS and the Yarn Package Manager by running the following commands
+Install NodeJS and the Yarn Package Manager by running the following commands :-
 
 > curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 > curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -

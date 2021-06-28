@@ -1,0 +1,93 @@
+<div class="col-sm-3">
+    <h4><%= t 'What Went Wrong'%> <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createwrong">✚</button></h4><br>
+     <!-- Form to create whatwentwrong -->
+    <div class="modal fade" id="createwrong" tabindex="-1" role="dialog" aria-labelledby="createwrong" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createwrong"><%= t 'Create WhatWentWrong'%></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <%= form_with url: "/createWhatWentWrong" do |form| %>
+                    <div>
+                        <%= form.text_area(:body,{:class => 'form-control',minlength: 5})%>
+                    </div>
+                    <br>
+                    <div>
+                        <%= form.submit({:class=> 'btn btn-primary'})  %>
+                    </div>
+                    <%= form.hidden_field :sprint_id, value: @sprint.id %>
+                    <%= form.hidden_field :locale, value: lang %>
+                    <% end %>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t 'Close'%></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+     <!-- Loop through each whatwent wrong of the sprint -->
+    <%@wrong.each do |w|%>
+    <%w.what_went_wrongs.each do |wrong| %>
+    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+        <div class="card-body">
+            <p class="card-text"> <%= wrong.body %><br></p>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#WentWrong<%= wrong.id%>">
+                <i class="fa fa-edit"> </i>
+            </button>
+            <div class="modal" id="WentWrong<%= wrong.id%>">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title"><%= t 'Edit'%></h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body" class="form-outline">
+                            <form method="patch" action="/what_went_wrongs/updateWhatWentWrong/<%=wrong.id%>">
+                                <textarea class="form-control" id="body" name="body" ><%= wrong.body %></textarea>
+                                <br />
+                                <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
+                                <input type="hidden" id="locale" name="locale" value="<%=lang%>">
+                                <input class="btn btn-primary btn-sm" type="submit" value="<%= t 'Update Post'%>" />
+                            </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger " data-dismiss="modal"><%= t 'Close' %></button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+             <!-- Form to implement delete button -->
+            <form method="post" action="/what_went_wrongs/destroyWhatWentWrong/<%=wrong.id%>" style='display: inline'>
+                <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
+                <input type="hidden" id="locale" name="locale" value="<%=lang%>">
+                <button class="btn btn-danger btn-sm" type="submit" data-confirm="Are you sure you want to delete?"><i class="fa fa-trash"></i></button>
+            </form>
+             <!-- Form to implement Like Button -->
+            <form method="post" action="/what_went_wrongs/likeWhatWentWrong/<%=wrong.id%>" style='display: inline'>
+                <input type="hidden" id="locale" name="locale" value="<%=lang%>">
+                <button class="btn  btn-dark btn-sm" type="submit"><i class="fa fa-thumbs-up"></i> <%=wrong.likes%></button>
+                <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
+            </form>
+        </div>
+    </div>
+
+    <% end %>
+    <% end %>
+    <br>
+    <br>
+</div>

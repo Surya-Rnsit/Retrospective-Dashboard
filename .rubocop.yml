@@ -14,11 +14,14 @@ Metrics/BlockLength:
   Exclude:
     - config/**/*
     - spec/**/*
+  
 
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - spec/**/*
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
   # ------------------------------------------------------- Rails --------------------------------------------------------
 # Checks for methods which delegate to other methods without using rails' builtin of the same name. Example:
 # def a

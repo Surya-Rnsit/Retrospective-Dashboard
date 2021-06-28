@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+##
+# This class represents the model of Sprint.
+# The name attribute should be present and unique.
 class Sprint < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   has_many :actionitems, dependent: :destroy

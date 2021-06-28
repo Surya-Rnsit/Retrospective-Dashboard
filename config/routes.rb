@@ -1,38 +1,40 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   scope '(:locale)', locale: /#{I18n.available_locales.join("|")}/ do
-    root 'dashboards#show'
-    get '/dashboards/:id', to: 'dashboards#index'
+    root 'sprints#index'
+    get '/sprints/:id', to: 'sprints#show'
 
-    post '/createWhatWentWell', to: 'dashboards#create_whatwentwell'
-    post '/createWhatWentWrong', to: 'dashboards#create_whatwentwrong'
-    post '/createImprovements', to: 'dashboards#create_improvements'
-    post '/createActionitems', to: 'dashboards#create_actionitems'
+    post '/createWhatWentWell', to: 'what_went_wells#create'
+    post '/createWhatWentWrong', to: 'what_went_wrongs#create'
+    post '/createImprovements', to: 'improvements#create'
+    post '/createActionitems', to: 'action_items#create'
 
-    post '/dashboards/destroyWhatWentWell/:id', to: 'dashboards#destroy_whatwentwell'
-    post '/dashboards/destroyWhatWentWrong/:id', to: 'dashboards#destroy_whatwentwrong'
-    post '/dashboards/destroyImprovements/:id', to: 'dashboards#destroy_improvements'
-    post '/dashboards/destroyactionitems/:id', to: 'dashboards#destroy_actionitems'
+    post '/what_went_wells/destroyWhatWentWell/:id', to: 'what_went_wells#destroy'
+    post '/what_went_wrongs/destroyWhatWentWrong/:id', to: 'what_went_wrongs#destroy'
+    post '/improvements/destroyImprovements/:id', to: 'improvements#destroy'
+    post '/action_items/destroyactionitems/:id', to: 'action_items#destroy'
 
-    get '/dashboards/updateWhatWentWell/:id', to: 'dashboards#update_whatwentwell'
-    patch '/dashboards/updateWhatWentWell/:id', to: 'dashboards#update_whatwentwell'
+    get '/what_went_wells/updateWhatWentWell/:id', to: 'what_went_wells#update'
+    patch '/what_went_wells/updateWhatWentWell/:id', to: 'what_went_wells#update'
 
-    get '/dashboards/updateWhatWentWrong/:id', to: 'dashboards#update_whatwentwrong'
-    patch '/dashboards/updateWhatWentWrong/:id', to: 'dashboards#update_whatwentwrong'
+    get '/what_went_wrongs/updateWhatWentWrong/:id', to: 'what_went_wrongs#update'
+    patch '/what_went_wrongs/updateWhatWentWrong/:id', to: 'what_went_wrongs#update'
 
-    get '/dashboards/updateImprovements/:id', to: 'dashboards#update_improvements'
-    patch '/dashboards/updateImprovements/:id', to: 'dashboards#update_improvements'
+    get '/improvements/updateImprovements/:id', to: 'improvements#update'
+    patch '/improvements/updateImprovements/:id', to: 'improvements#update'
 
-    get '/dashboards/updateactionitems/:id', to: 'dashboards#update_actionitems'
-    patch '/dashboards/updateactionitems/:id', to: 'dashboards#update_actionitems'
-    post '/dashboards/updatecheckbox/:id', to: 'dashboards#update_checkbox'
+    get '/action_items/updateactionitems/:id', to: 'action_items#update'
+    patch '/action_items/updateactionitems/:id', to: 'action_items#update'
+    post '/action_items/updatecheckbox/:id', to: 'action_items#update_checkbox'
 
-    post '/dashboards/likeWhatWentWell/:id', to: 'dashboards#like_whatwentwell'
-    post '/dashboards/likeWhatWentWrong/:id', to: 'dashboards#like_whatwentwrong'
-    post '/dashboards/likeImprovements/:id', to: 'dashboards#like_improvements'
+    post '/what_went_wells/likeWhatWentWell/:id', to: 'what_went_wells#like'
+    post '/what_went_wrongs/likeWhatWentWrong/:id', to: 'what_went_wrongs#like'
+    post '/improvements/likeImprovements/:id', to: 'improvements#like'
 
-    post '/createSprint', to: 'dashboards#create_sprint'
-    post 'dashboards/destroySprint/:id', to: 'dashboards#destroy_sprint'
+    post '/createSprint', to: 'sprints#create'
+    post 'sprints/destroySprint/:id', to: 'sprints#destroy'
 
-    post '/dashboards/moveActionItems', to: 'dashboards#move_actionitems'
+    post '/action_items/moveActionItems', to: 'action_items#move'
   end
 end
