@@ -3,26 +3,26 @@
 class SprintsController < ApplicationController
   ##
   # Public: This method renders index.html.erb which is the root page .
-  # allsprints - Holds reference to all available sprints .
+  # all_sprints - Holds reference to all available sprints .
   def index
-    @allsprints = Sprint.all
+    @all_sprints = Sprint.all
   end
 
   ##
   # Public: This method renders show.html.erb which is the main dashboard page.
   # sprint - Holds reference to the current sprint .
-  # well - Holds reference to all the Whatwentwell posts of current sprint .
-  # wrong - Holds reference to all the WhatWentWrong posts of current sprint .
-  # improve - Holds reference to all the Improvement posts of current sprint .
-  # action - Holds reference to all the actionitems posts of current sprint .
-  # allsprints - Holds reference to all available sprints .
+  # what_went_well - Holds reference to all the Whatwentwell posts of current sprint .
+  # what_went_wrong - Holds reference to all the WhatWentWrong posts of current sprint .
+  # improvements - Holds reference to all the Improvement posts of current sprint .
+  # action_items - Holds reference to all the actionitems posts of current sprint .
+  # all_sprints - Holds reference to all available sprints .
   def show
     @sprint = Sprint.find(params[:id])
-    @allsprints = Sprint.all
-    @well = Sprint.includes(:what_went_wells).where(what_went_wells: { sprint_id: @sprint.id.to_s })
-    @action = Sprint.includes(:actionitems).where(actionitems: { sprint_id: @sprint.id.to_s })
-    @wrong = Sprint.includes(:what_went_wrongs).where(what_went_wrongs: { sprint_id: @sprint.id.to_s })
-    @improve = Sprint.includes(:improvements).where(improvements: { sprint_id: @sprint.id.to_s })
+    @all_sprints = Sprint.all
+    @what_went_well = Sprint.includes(:what_went_wells).where(what_went_wells: { sprint_id: @sprint.id})
+    @action_items = Sprint.includes(:actionitems).where(actionitems: { sprint_id: @sprint.id })
+    @what_went_wrong = Sprint.includes(:what_went_wrongs).where(what_went_wrongs: { sprint_id: @sprint.id })
+    @improvements = Sprint.includes(:improvements).where(improvements: { sprint_id: @sprint.id })
   end
 
   ##
@@ -33,9 +33,7 @@ class SprintsController < ApplicationController
     if @sprint.save
       redirect_to root_path + "/sprints/#{@sprint.id}"
     else
-      render(json: {
-               message: 'Sprint Already Exists or Sprint not created'
-             }) && return
+      redirect_to root_path, danger: "Sprint Already Exists"       
     end
   end
 
@@ -48,3 +46,6 @@ class SprintsController < ApplicationController
     redirect_to root_path
   end
 end
+
+
+

@@ -13,7 +13,7 @@
                 <div class="modal-body">
                     <%= form_with url: "/createWhatWentWrong" do |form| %>
                     <div>
-                        <%= form.text_area(:body,{:class => 'form-control',minlength: 5})%>
+                        <%= form.text_area(:body,{:class => 'form-control',minlength: 5, required: true})%>
                     </div>
                     <br>
                     <div>
@@ -32,8 +32,8 @@
     </div>
     <br>
      <!-- Loop through each whatwent wrong of the sprint -->
-    <%@wrong.each do |w|%>
-    <%w.what_went_wrongs.each do |wrong| %>
+    <%@what_went_wrong.each do |went_wrong|%>
+    <%went_wrong.what_went_wrongs.each do |wrong| %>
     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
         <div class="card-body">
             <p class="card-text"> <%= wrong.body %><br></p>
@@ -48,7 +48,7 @@
 
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title"><%= t 'Edit'%></h4>
+                            <h4 class="modal-title text-primary"><%= t 'Edit'%></h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
@@ -91,3 +91,4 @@
     <br>
     <br>
 </div>
+

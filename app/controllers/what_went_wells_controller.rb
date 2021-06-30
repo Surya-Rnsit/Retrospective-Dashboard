@@ -6,9 +6,9 @@ class WhatWentWellsController < ApplicationController
   # went_well - Holds reference to new whatwentwell post with particular id.
   # if post not created renders an error message
   def create
-    @went_well = WhatWentWell.new(body: params[:body], sprint_id: params[:sprint_id])
-    if @went_well.save
-      redirect_to root_path + "/sprints/#{@went_well.sprint_id}"
+    @what_went_well = WhatWentWell.new(body: params[:body], sprint_id: params[:sprint_id])
+    if @what_went_well.save
+      redirect_to root_path + "/sprints/#{@what_went_well.sprint_id}"
     else
       render(json: {
                message: 'WhatWentWell not created(length of body should be more than 5)'
@@ -45,8 +45,9 @@ class WhatWentWellsController < ApplicationController
   # Public: Increments likes value for whatwentwell post
   # well - Holds reference to the WhatWentWell post with particular id.
   def like
-    @well = WhatWentWell.find(params[:id])
-    @well.update(likes: @well.likes + 1)
+    @what_went_well = WhatWentWell.find(params[:id])
+    @what_went_well.update(likes: @what_went_well.likes + 1)
     redirect_to root_path + "/sprints/#{params[:sprint_id]}"
   end
 end
+

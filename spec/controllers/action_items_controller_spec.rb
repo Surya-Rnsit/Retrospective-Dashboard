@@ -4,17 +4,21 @@ RSpec.describe ActionItemsController, type: :controller do
 
     describe '#create' do
         let(:locale) { 'en' }
+        let(:sprint) do
+          Sprint.create(
+            id: '1', 
+            name: 'firstsprint'
+          )
+        end
         it 'creates a successful post for Actionitems' do
-          @sprint = Sprint.create(id: '1', name: 'firstsprint')
-          @action = Actionitem.create(id: '1', body: 'bodyaction', sprint_id: @sprint.id)
+          @action = Actionitem.create(id: '1', body: 'bodyaction', sprint_id: sprint.id)
           expect(@action).to be_an_instance_of Actionitem
           post :create,
                params: { id: @action.id, body: @action.body, sprint_id: @action.sprint_id, locale: locale }
-          expect(response).to redirect_to 'http://test.host/' + locale + '/sprints/' + @sprint.id.to_s
+          expect(response).to redirect_to 'http://test.host/' + locale + '/sprints/' + sprint.id.to_s
         end
         it 'When the body length is less than 5 , Actionitems is not created' do
-          @sprint = Sprint.create(id: '1', name: 'firstsprint')
-          @action = Improvement.create(id: '1', body: 'body', sprint_id: @sprint.id)
+          @action = Improvement.create(id: '1', body: 'body', sprint_id: sprint.id)
           post :create,
                params: { id: @action.id, body: @action.body, sprint_id: @action.sprint_id, locale: locale }
           expect(JSON.parse(response.body)['message']).to eq('Actionitems not created')
@@ -23,19 +27,23 @@ RSpec.describe ActionItemsController, type: :controller do
     
     describe 'PATCH #update' do
         let(:locale) { 'en' }
+        let(:sprint) do
+          Sprint.create(
+            id: '1', 
+            name: 'firstsprint'
+          )
+        end
         it 'when update of action is successful' do
-          @sprint = Sprint.create(id: '1', name: 'firstsprint')
-          @update = Actionitem.create(id: '1', body: 'bodyofaction', sprint_id: @sprint.id)
+          @update = Actionitem.create(id: '1', body: 'bodyofaction', sprint_id: sprint.id)
           patch :update,
-                params: { id: @update.id, body: @update.body, sprint_id: @sprint.id, locale: locale }
-          expect(response).to redirect_to 'http://test.host/' + locale + '/sprints/' + @sprint.id.to_s
+                params: { id: @update.id, body: @update.body, sprint_id: sprint.id, locale: locale }
+          expect(response).to redirect_to 'http://test.host/' + locale + '/sprints/' + sprint.id.to_s
         end
     
         it 'when update of what went wrong is not successful' do
-          @sprint = Sprint.create(id: '1', name: 'firstsprint')
           @update = Actionitem.create(id: '1', body: 'ss')
           patch :update,
-                params: { id: @update.id, body: @update.body, sprint_id: @sprint.id, locale: locale }
+                params: { id: @update.id, body: @update.body, sprint_id: sprint.id, locale: locale }
           expect(JSON.parse(response.body)['message']).to eq('Record with this id is not found')
         end
     end
@@ -54,24 +62,28 @@ RSpec.describe ActionItemsController, type: :controller do
       
     describe 'POST #update_checkbox' do
         let(:locale) { 'en' }
+        let(:sprint) do
+          Sprint.create(
+            id: '1', 
+            name: 'firstsprint'
+          )
+        end
         it 'update checkbox when ischeck is true' do
-          @sprint = Sprint.create(id: '1', name: 'firstsprint')
-          @action = Actionitem.create(id: '1', body: 'bodyofwell', sprint_id: @sprint.id, ischeck: 'true')
-          post :update_checkbox, params: { id: @action.id, sprint_id: @sprint.id, locale: locale }
+          @action = Actionitem.create(id: '1', body: 'bodyofwell', sprint_id: sprint.id, ischeck: 'true')
+          post :update_checkbox, params: { id: @action.id, sprint_id: sprint.id, locale: locale }
           if @action.ischeck == true
             @action.update(ischeck: false)
-            redirect_to 'http://localhost:3000/' + locale + '/sprints/' + @sprint.id.to_s
+            redirect_to 'http://localhost:3000/' + locale + '/sprints/' + sprint.id.to_s
           end
         end
     
         it 'update checkbox when ischeck is false' do
-          @sprint = Sprint.create(id: '1', name: 'firstsprint')
-          @action = Actionitem.create(id: '1', body: 'bodyofwell', sprint_id: @sprint.id, ischeck: 'false')
-          post :update_checkbox, params: { id: @action.id, sprint_id: @sprint.id, locale: locale }
+          @action = Actionitem.create(id: '1', body: 'bodyofwell', sprint_id: sprint.id, ischeck: 'false')
+          post :update_checkbox, params: { id: @action.id, sprint_id: sprint.id, locale: locale }
           @action.update(ischeck: true)
           if @action.ischeck == false
             @action.update(ischeck: true)
-            redirect_to 'http://localhost:3000/' + locale + '/sprints/' + @sprint.id.to_s
+            redirect_to 'http://localhost:3000/' + locale + '/sprints/' + sprint.id.to_s
           end
         end
     end

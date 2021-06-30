@@ -71,3 +71,4 @@ class ActionItemsController < ApplicationController
     redirect_to root_path + "/sprints/#{params[:sprint_id]}"
   end
 end
+

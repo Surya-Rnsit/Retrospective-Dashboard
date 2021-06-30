@@ -3,12 +3,12 @@
 class WhatWentWrongsController < ApplicationController
   ##
   # Public: Creates a post for WhatWentWrong and displays it to the sprint page .
-  # went_wrong - Holds reference to new WhatWentWrong post .
+  # what_went_wrong - Holds reference to new WhatWentWrong post .
   # if post not created renders an error message .
   def create
-    @went_wrong = WhatWentWrong.new(body: params[:body], sprint_id: params[:sprint_id])
-    if @went_wrong.save
-      redirect_to root_path + "/sprints/#{@went_wrong.sprint_id}"
+    @what_went_wrong = WhatWentWrong.new(body: params[:body], sprint_id: params[:sprint_id])
+    if @what_went_wrong.save
+      redirect_to root_path + "/sprints/#{@what_went_wrong.sprint_id}"
     else
       render(json: {
                message: 'WhatWentWrong not created(length of body should be more than 5)'
@@ -42,10 +42,11 @@ class WhatWentWrongsController < ApplicationController
   end
 
   # Public: Increments likes value for WhatWentWrong post .
-  # wrong - Holds reference to the WhatWentWrong post with particular id.
+  # what_went_wrong - Holds reference to the WhatWentWrong post with particular id.
   def like
-    @wrong = WhatWentWrong.find(params[:id])
-    @wrong.update(likes: @wrong.likes + 1)
+    @what_went_wrong = WhatWentWrong.find(params[:id])
+    @what_went_wrong.update(likes: @what_went_wrong.likes + 1)
     redirect_to root_path + "/sprints/#{params[:sprint_id]}"
   end
 end
+

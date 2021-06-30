@@ -13,7 +13,7 @@
                 <div class="modal-body">
                     <%= form_with url: "/createActionitems" do |form| %>
                     <div>
-                        <%= form.text_area(:body,{:class => 'form-control',minlength: 5})%>
+                        <%= form.text_area(:body,{:class => 'form-control',minlength: 5, required: true})%>
                     </div>
                     <br>
                     <div>
@@ -32,8 +32,8 @@
     </div>
     <br>
      <!-- Loop through each action item of the sprint -->
-    <%@action.each do |w|%>
-    <%w.actionitems.each do |action| %>
+    <%@action_items.each do |action_item|%>
+    <%action_item.actionitems.each do |action| %>
     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
         <div class="card-body">
              <!-- Form To Update Checkbox for Action items -->
@@ -65,7 +65,7 @@
                     <%= t 'Move To'%>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                    <% @allsprints.each do |move_sprint| %>
+                    <% @all_sprints.each do |move_sprint| %>
                     <form method="post" id="myForm<%=move_sprint.id%>" action="/action_items/moveActionItems" style='display: inline'>
                         <input type="hidden" id="moveto" name="moveto" value="<%=move_sprint.id %>">
                         <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
@@ -89,7 +89,7 @@
 
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title"><%= t'Edit'%></h4>
+                            <h4 class="modal-title text-primary"><%= t'Edit'%></h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
@@ -123,3 +123,4 @@
         <% end %>
     </div>
 </div>
+

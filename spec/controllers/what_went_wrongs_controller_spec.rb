@@ -4,18 +4,22 @@ RSpec.describe WhatWentWrongsController, type: :controller do
     
     describe '#create' do
         let(:locale) { 'en' }
+        let(:sprint) do
+          Sprint.create(
+            id: '1', 
+            name: 'firstsprint'
+          )
+        end
         it 'creates a successful post for what went wrong' do
-          @sprint = Sprint.create(id: '1', name: 'firstsprint')
-          @wrong = WhatWentWrong.create(id: '1', body: 'bodywrong', sprint_id: @sprint.id)
+          @wrong = WhatWentWrong.create(id: '1', body: 'bodywrong', sprint_id: sprint.id)
           expect(@wrong).to be_an_instance_of WhatWentWrong
           post :create,
                params: { id: @wrong.id, body: @wrong.body, sprint_id: @wrong.sprint_id, locale: locale }
-          expect(response).to redirect_to 'http://test.host/' + locale + '/sprints/' + @sprint.id.to_s
+          expect(response).to redirect_to 'http://test.host/' + locale + '/sprints/' + sprint.id.to_s
         end
     
         it 'When the body length is less than 5 , what went wrong is not created' do
-          @sprint = Sprint.create(id: '1', name: 'firstsprint')
-          @wrong = WhatWentWrong.create(id: '1', body: 'body', sprint_id: @sprint.id)
+          @wrong = WhatWentWrong.create(id: '1', body: 'body', sprint_id: sprint.id)
           post :create,
                params: { id: @wrong.id, body: @wrong.body, sprint_id: @wrong.sprint_id, locale: locale }
           expect(JSON.parse(response.body)['message']).to eq('WhatWentWrong not created(length of body should be more than 5)')
@@ -24,19 +28,23 @@ RSpec.describe WhatWentWrongsController, type: :controller do
 
     describe 'PATCH #update' do
         let(:locale) { 'en' }
+        let(:sprint) do
+          Sprint.create(
+            id: '1', 
+            name: 'firstsprint'
+          )
+        end
         it 'when update of what went wrong is successful' do
-          @sprint = Sprint.create(id: '1', name: 'firstsprint')
-          @updatewrong = WhatWentWrong.create(id: '1', body: 'bodyofwrong', sprint_id: @sprint.id)
+          @updatewrong = WhatWentWrong.create(id: '1', body: 'bodyofwrong', sprint_id: sprint.id)
           patch :update,
-                params: { id: @updatewrong.id, body: @updatewrong.body, sprint_id: @sprint.id, locale: locale }
-          expect(response).to redirect_to 'http://test.host/' + locale + '/sprints/' + @sprint.id.to_s
+                params: { id: @updatewrong.id, body: @updatewrong.body, sprint_id: sprint.id, locale: locale }
+          expect(response).to redirect_to 'http://test.host/' + locale + '/sprints/' + sprint.id.to_s
         end
     
         it 'when update of what went wrong is not successful' do
-          @sprint = Sprint.create(id: '1', name: 'firstsprint')
-          @updatewrong = WhatWentWrong.create(id: '1', body: 'ss', sprint_id: @sprint.id)
+          @updatewrong = WhatWentWrong.create(id: '1', body: 'ss', sprint_id: sprint.id)
           patch :update,
-                params: { id: @updatewrong.id, body: @updatewrong.body, sprint_id: @sprint.id, locale: locale }
+                params: { id: @updatewrong.id, body: @updatewrong.body, sprint_id: sprint.id, locale: locale }
           expect(JSON.parse(response.body)['message']).to eq('Record with this id is not found')
         end
     end

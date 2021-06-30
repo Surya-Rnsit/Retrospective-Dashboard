@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   # This to to prevent forgery protection system.
   # If you have controllers that are meant to be called by external parties you should disable forgery protection.
   skip_before_action :verify_authenticity_token
-
+  add_flash_types :danger, :info, :warning, :success
   private
 
   def set_locale
@@ -15,3 +15,4 @@ class ApplicationController < ActionController::Base
     { locale: I18n.locale }.merge options
   end
 end
+

@@ -47,8 +47,10 @@ class ImprovementsController < ApplicationController
   # Public: Increments likes value for Improvement post
   # improve - Holds reference to the Improvement post with particular id.
   def like
-    @improve = Improvement.find(params[:id])
-    @improve.update(likes: @improve.likes + 1)
+    @improvement = Improvement.find(params[:id])
+    @improvement.update(likes: @improvement.likes + 1)
     redirect_to root_path + "/sprints/#{params[:sprint_id]}"
   end
 end
+
+

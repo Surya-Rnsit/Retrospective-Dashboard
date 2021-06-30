@@ -13,7 +13,7 @@
                 <div class="modal-body">
                     <%= form_with url: "/createImprovements"  do |form| %>
                     <div>
-                        <%= form.text_area(:body,{:class => 'form-control',minlength: 5})%>
+                        <%= form.text_area(:body,{:class => 'form-control',minlength: 5, required: true})%>
                     </div>
                     <br>
                     <div>
@@ -32,8 +32,8 @@
     </div>
     <br>
      <!-- Loop through all improvements of the sprint -->
-    <%@improve.each do |w|%>
-    <%w.improvements.each do |improve| %>
+    <%@improvements.each do |improvement|%>
+    <%improvement.improvements.each do |improve| %>
     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
         <div class="card-body">
             <p class="card-text"> <%= improve.body %><br></p>
@@ -47,7 +47,7 @@
                     <div class="modal-content">
 
                         <!-- Modal Header -->
-                        <div class="modal-header">
+                        <div class="modal-header text-primary">
                             <h4 class="modal-title"><%= t'Edit'%></h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
@@ -88,3 +88,4 @@
     <% end %>
     <% end %>
 </div>
+

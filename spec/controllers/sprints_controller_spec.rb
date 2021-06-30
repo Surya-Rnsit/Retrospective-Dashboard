@@ -18,17 +18,26 @@ RSpec.describe SprintsController, type: :controller do
     end
 
     describe '#create' do
+      let(:sprint1) do
+        Sprint.create(
+          id: '5', 
+          name: 'firstsprint'
+        )
+      end
+      let(:sprint2) do
+        Sprint.create(
+          id: '2', 
+          name: 'firstsprint'
+        )
+      end
         it 'creates a successful sprint' do
-          @createsprint = Sprint.create(id: '1', name: 'somesprint')
-          post :create, params: { name: @createsprint.name }
-          expect(response).to be_success
+          post :create, params: { id: sprint1.id, name: sprint1.name }
+          expect(response).to redirect_to 'http://test.host/en' 
         end
         
-        it 'creates does not create a successful sprint' do
-          @createsprint1 = Sprint.create(id: '1', name: 'firstsprint')
-          @createsprint2 = Sprint.create(id: '2', name: 'firstsprint')
-          post :create, params: { id: @createsprint2.id, name: @createsprint2.name }
-          expect(JSON.parse(response.body)['message']).to eq('Sprint Already Exists or Sprint not created')
+        it 'does not create a successful sprint' do
+          post :create, params: { id: sprint1.id, name: sprint2.name }
+          expect(response).to redirect_to 'http://test.host/en'
         end
     end
 
