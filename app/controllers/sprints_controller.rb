@@ -33,7 +33,7 @@ class SprintsController < ApplicationController
     if @sprint.save
       redirect_to root_path + "/sprints/#{@sprint.id}"
     else
-      redirect_to root_path, danger: "Sprint Already Exists"       
+      redirect_to root_path, danger: t('Sprint Already Exists')       
     end
   end
 

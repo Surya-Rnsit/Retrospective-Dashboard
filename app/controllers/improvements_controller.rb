@@ -36,10 +36,10 @@ class ImprovementsController < ApplicationController
 
   ##
   # Public: delete a post form Improvement and removes it from the the sprints page
-  # destroy_well - Holds reference to the Improvement post with particular id.
+  # destroy_improvement - Holds reference to the Improvement post with particular id.
   def destroy
-    @destroy_well = Improvement.find(params[:id])
-    @destroy_well.destroy
+    @destroy_improvement = Improvement.find(params[:id])
+    @destroy_improvement.destroy
     redirect_to root_path + "/sprints/#{params[:sprint_id]}"
   end
 
@@ -52,5 +52,6 @@ class ImprovementsController < ApplicationController
     redirect_to root_path + "/sprints/#{params[:sprint_id]}"
   end
 end
+
 
 
