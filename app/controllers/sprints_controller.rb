@@ -29,7 +29,7 @@ class SprintsController < ApplicationController
   # Public: creates new sprint
   # sprint - Holds reference to the new sprint.
   def create
-    @sprint = Sprint.new(name: params[:name])
+    @sprint = Sprint.new(name: params[:name], created_at: params[:date])
     if @sprint.save
       redirect_to root_path + "/sprints/#{@sprint.id}"
     else

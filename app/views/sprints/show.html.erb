@@ -5,19 +5,14 @@
             <a class="btn btn-info dropdown-toggle mr-2" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <%=@sprint.name%>
             </a>
-             <!-- Dropdwn List For Sprints on the navbar -->
+            <!-- Dropdwn List For Sprints on the navbar -->
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <% @all_sprints.each do |sprint| %>
                 <a class="dropdown-item" href="<%=root_path%>/sprints/<%=sprint.id%>"><%=sprint.name%></a>
-                <form method="post" action="/sprints/destroySprint/<%=sprint.id%>" style='display: inline'>
-                    <div class="col text-center">
-                        <button class="btn btn-danger  btn-sm" type="submit" data-confirm="Are you sure you want to delete?"><i class="fa fa-trash"></i></button>
-                    </div>
-                </form>
                 <%end%>
             </div>
         </div>
-        <button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#createsprint"><%= t 'Add New Sprint'%></button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createsprint"><%= t 'Add New Sprint'%></button>
         <div class="modal fade" id="createsprint" tabindex="-1" role="dialog" aria-labelledby="createsprint" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -28,10 +23,14 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                         <!-- form to create a sprint -->
+                        <!-- form to create a sprint -->
                         <%= form_with url: "/createSprint" do |form| %>
                         <div>
                             <%= form.text_area(:name,{:class => 'form-control', required: true,placeholder: "Sprint Name"})%>
+                        </div>
+                        <br>
+                        <div>
+                            <%= form.date_field(:date,{:class => 'form-control', required: true})%>
                         </div>
                         <br>
                         <div>
@@ -46,6 +45,14 @@
                 </div>
             </div>
         </div>
+        <div>
+        <form method="post" action="/sprints/destroySprint/<%=@sprint.id%>" style='display: inline'>
+            <div class="col text-center">
+                <button class="btn btn-danger" type="submit" data-confirm="Are you sure you want to delete?"><%= t 'Delete Sprint'%></i></button>
+            </div>
+        </form>
+        </div>
+        <span style="color: white">Date : <%=@sprint.created_at.to_s[0..10]%></span>
         <%= content_tag :button,:class => "btn ml-auto" do %>
         <%= link_to ' English', locale: :en%>
         <%end unless current_page?(locale: :en) %>
@@ -55,11 +62,11 @@
     </nav>
     <br>
     <div class="container">
-         <!-- Renders whatwentwell,whatwentwrong,improvements,actionitem partial -->
+        <!-- Renders whatwentwell,whatwentwrong,improvements,actionitem partial -->
         <div class="row">
-        
+
             <%= render partial: "whatwentwell", locals: {lang: I18n.locale} %>
-        
+
             <%= render partial: "whatwentwrong", locals: {lang: I18n.locale} %>
 
             <%= render partial: "improvements", locals: {lang: I18n.locale} %>
@@ -71,4 +78,3 @@
     </div>
 
 </body>
-

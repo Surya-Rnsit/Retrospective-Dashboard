@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 ##
 # This class represents the model of Actionitem
 class Actionitem < ApplicationRecord
