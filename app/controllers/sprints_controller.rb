@@ -30,10 +30,6 @@ class SprintsController < ApplicationController
   # sprint - Holds reference to the new sprint.
   def create
     @start_date=(params[:date]).to_date
-    #@endsprint_date=(params[:date].to_date+14)
-    # puts @start_date
-    # puts "----------"
-    # puts @endsprint_date
     @all_sprints = Sprint.all
     flag=false
     @all_sprints.each do |sprints|

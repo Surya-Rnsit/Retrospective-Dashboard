@@ -8,7 +8,7 @@
             <!-- Dropdwn List For Sprints on the navbar -->
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <% @all_sprints.each do |sprint| %>
-                <a class="dropdown-item" href="<%=root_path%>/sprints/<%=sprint.id%>"><%=sprint.name%></a>
+                <a class="dropdown-item inline text-center" href="<%=root_path%>/sprints/<%=sprint.id%>"><%=sprint.name%></a>
                 <%end%>
             </div>
         </div>
@@ -40,22 +40,19 @@
                         <% end %>
                         <br>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t'Close'%></button>
-                    </div>
                 </div>
             </div>
         </div>
         <div>
-        <form method="post" action="/sprints/destroySprint/<%=@sprint.id%>" style='display: inline'>
-            <div class="col text-center">
-                <button class="btn btn-danger" type="submit" data-confirm="Are you sure you want to delete?"><%= t 'Delete Sprint'%></i></button>
-            </div>
-        </form>
+            <form method="post" action="/sprints/destroySprint/<%=@sprint.id%>" style='display: inline'>
+                <div class="col text-center">
+                    <button class="btn btn-danger" type="submit" data-confirm="Are you sure you want to delete?"><%= t 'Delete Sprint'%></i></button>
+                </div>
+            </form>
         </div>
 
         <span style="color: white">Sprint duration : <%=@sprint.created_at.to_s[0..10] %></span> &nbsp
-        <span style="color: white"> - <%=@sprint.created_at.to_date+14%> </span> 
+        <span style="color: white"> - <%=@sprint.created_at.to_date+14%> </span>
         <%= content_tag :button,:class => "btn ml-auto" do %>
         <%= link_to ' English', locale: :en%>
         <%end unless current_page?(locale: :en) %>
