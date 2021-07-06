@@ -29,8 +29,9 @@
                             <%= form.text_area(:name,{:class => 'form-control', required: true,placeholder: "Sprint Name"})%>
                         </div>
                         <br>
+                        <%= form.label :From, "Date" %>
                         <div>
-                            <%= form.date_field(:date,{:class => 'form-control', required: true})%>
+                            <%= form.date_field(:date, {:class => 'form-control', required: true,min: DateTime.now,placeholder: "dd/mm/yyyy"})%>
                         </div>
                         <br>
                         <div>
@@ -52,7 +53,9 @@
             </div>
         </form>
         </div>
-        <span style="color: white">Date : <%=@sprint.created_at.to_s[0..10]%></span>
+
+        <span style="color: white">Sprint duration : <%=@sprint.created_at.to_s[0..10] %></span> &nbsp
+        <span style="color: white"> - <%=@sprint.created_at.to_date+14%> </span> 
         <%= content_tag :button,:class => "btn ml-auto" do %>
         <%= link_to ' English', locale: :en%>
         <%end unless current_page?(locale: :en) %>

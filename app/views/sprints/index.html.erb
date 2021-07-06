@@ -29,12 +29,13 @@
                             <%= form.text_area(:name,{:class => 'form-control', required: true,placeholder: "Sprint Name"})%>
                         </div>
                         <br>
+                        <%= form.label :From, "Date" %>
                         <div>
-                        <%= form.date_field(:date,{:class => 'form-control', required: true})%>
+                            <%= form.date_field(:date, {:class => 'form-control', required: true,min: DateTime.now,placeholder: "dd/mm/yyyy"})%>
                         </div>
-                         <br>
+                        <br>
                         <div>
-                            <%= form.submit({:class=> 'btn btn-primary'}) %>
+                            <%= form.submit({:class=> 'btn btn-primary'})  %>
                         </div>
                         <% end %>
                         <br>

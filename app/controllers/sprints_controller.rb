@@ -29,11 +29,29 @@ class SprintsController < ApplicationController
   # Public: creates new sprint
   # sprint - Holds reference to the new sprint.
   def create
-    @sprint = Sprint.new(name: params[:name], created_at: params[:date])
-    if @sprint.save
-      redirect_to root_path + "/sprints/#{@sprint.id}"
-    else
-      redirect_to root_path, danger: t('Sprint Already Exists')       
+    @start_date=(params[:date]).to_date
+    #@endsprint_date=(params[:date].to_date+14)
+    # puts @start_date
+    # puts "----------"
+    # puts @endsprint_date
+    @all_sprints = Sprint.all
+    flag=false
+    @all_sprints.each do |sprints|
+      if @start_date>=(sprints.created_at) && @start_date<=(sprints.created_at.to_date+14)
+        @Booked_sprint=sprints
+        flag=true
+        break
+      end  
+    end
+    if(flag)
+      redirect_to root_path, danger: 'Sprint '+@Booked_sprint.name+' already exists from  '+(@Booked_sprint.created_at.to_date).to_s+' to '+(@Booked_sprint.created_at.to_date+14).to_s
+    else 
+      @sprint = Sprint.new(name: params[:name], created_at: params[:date])
+      if @sprint.save
+        redirect_to root_path + "/sprints/#{@sprint.id}"
+      else
+        redirect_to root_path, danger: t('Sprint Already Exists')       
+      end
     end
   end
 
