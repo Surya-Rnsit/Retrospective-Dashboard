@@ -31,7 +31,7 @@
                         <br>
                         <%= form.label :From, "Date" %>
                         <div>
-                            <%= form.date_field(:date, {:class => 'form-control', required: true,min: DateTime.now,placeholder: "dd/mm/yyyy"})%>
+                            <%= form.date_field(:date, {:class => 'form-control', required: true,value: DateTime.now})%>
                         </div>
                         <br>
                         <div>
