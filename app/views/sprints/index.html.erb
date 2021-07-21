@@ -1,9 +1,9 @@
-<body style="background-color:#C0C0C0;">
-    <nav class="navbar navbar-light -lighbgt justify-content-start " style="background-color: #989898;">
-        <span class="navbar-brand mb-0 h1 navbar-brand" style="color:black"><i class="fa fa-calendar-check-o" aria-hidden="true"></i><a style="color:black" href="<%=root_path%>"> <%= t 'Retrospective Dashboard'%></a></span>
+<body style="background-color:white;">
+    <nav class="navbar navbar-light -lighbgt justify-content-start " style="background-color: #E0FFFF;">
+        <span class="navbar-brand mb-0 h1 navbar-brand" style="color:black"><i class="fa fa-calendar-check-o" aria-hidden="true"></i><a style="color:black" href="<%=root_path%>">Retrospective Dashboard</a></span>
         <div class="dropdown show">
             <a class="btn btn-info dropdown-toggle mr-2 " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <%= t 'All Sprints' %>
+                All Sprints
             </a>
             <!-- Dropdwn List For Sprints on the navbar -->
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -12,12 +12,12 @@
                 <%end%>
             </div>
         </div>
-        <button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#createsprint"><%= t 'Add New Sprint'%> </button>
+        <button type="button" class="btn btn-success mr-2 " data-toggle="modal" data-target="#createsprint">Add New Sprint</button>
         <div class="modal fade" id="createsprint" tabindex="-1" role="dialog" aria-labelledby="createsprint" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createsprint"><%= t'Add New Sprint'%> </h5>
+                        <h5 class="modal-title" id="createsprint">Add New Sprint</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -43,18 +43,11 @@
                 </div>
             </div>
         </div>
-        <%= content_tag :button,:class => "btn ml-auto" do %>
-        <%= link_to ' English', locale: :en%>
-        <%end unless current_page?(locale: :en) %>
-        <%= content_tag :button,:class => " btn ml-auto" do %>
-        <%= link_to ' French', locale: :fr%>
-        <%end unless current_page?(locale: :fr) %>
     </nav>
     <br>
     <div class="container">
         <%= render 'flashmessages' %>
-        <h1 style=" text-align: center;"><br><%= t 'HELLO' %>,<br><br><%= t 'WELCOME TO THE DASHBOARD' %>!! <br><br><%= t 'Please add a new Sprint or checkout the existing Sprints from the dropdown menu' %></h1>
-
+        <h1 style=" text-align: center;"><br>HELLO,<br><br>WELCOME TO THE DASHBOARD !! <br><br>Please add a new Sprint or checkout the existing Sprints from the dropdown menu</h1>
     </div>
 
 </body>

@@ -1,5 +1,5 @@
 <div class="col-sm-3">
-    <h4><%= t 'How to Improve?'%> <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createimprove">✚</button></h4><br>
+    <h4>How to Improve?<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createimprove">✚</button></h4><br>
     <div class="modal fade" id="createimprove" tabindex="-1" role="dialog" aria-labelledby="createimprove" aria-hidden="true">
         <div class="modal-dialog" role="document">
          <!-- Form to create Improvements post-->
@@ -20,7 +20,6 @@
                         <%= form.submit({:class=> 'btn btn-primary'})  %>
                     </div>
                     <%= form.hidden_field :sprint_id, value: @sprint.id %>
-                    <input type="hidden" id="locale" name="locale" value="<%=lang%>">
                     <% end %>
                     <br>
                 </div>
@@ -31,7 +30,7 @@
      <!-- Loop through all improvements of the sprint -->
     <%@improvements.each do |improvement|%>
     <%improvement.improvements.each do |improve| %>
-    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+    <div class="card  bg-info mb-3" style="max-width: 18rem;">
         <div class="card-body">
             <p class="card-text"> <%= improve.body %><br></p>
         </div>
@@ -54,8 +53,7 @@
                                 <textarea class="form-control" id="body" name="body"><%= improve.body %></textarea>
                                 <br />
                                 <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
-                                <input type="hidden" id="locale" name="locale" value="<%=lang%>">
-                                <input class="btn btn-primary btn-sm" type="submit" value="<%= t 'Update Post'%>" />
+                                <input class="btn btn-primary btn-sm" type="submit" value="Update Post" />
                             </form>
                         </div>
                     </div>
@@ -64,13 +62,11 @@
              <!-- Form for Delete button -->
             <form method="post" action="/improvements/destroyImprovements/<%=improve.id%>" style='display: inline'>
                 <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
-                <input type="hidden" id="locale" name="locale" value="<%=lang%>">
                 <button class="btn btn-danger btn-sm" type="submit" data-confirm="Are you sure you want to delete?"><i class="fa fa-trash"></i></button>
             </form>
             <!-- Form for Like button -->
             <form method="post" action="/improvements/likeImprovements/<%=improve.id%>" style='display: inline'>
-                <button class="btn  btn-dark btn-sm" type="submit"><i class="fa fa-thumbs-up"></i> <%=improve.likes%></button>
-                <input type="hidden" id="locale" name="locale" value="<%=lang%>">
+                <button class="btn  btn-grey btn-sm" type="submit"><i class="fa fa-thumbs-up"></i> <%=improve.likes%></button>
                 <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
             </form>
         </div>

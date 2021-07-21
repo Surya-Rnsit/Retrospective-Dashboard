@@ -39,7 +39,7 @@ class ActionItemsController < ApplicationController
     if @action_item.ischeck
       @action_item.update(ischeck: false)
     else
-      @action_item.update(ischeck: true)
+      @action_item.update(ischeck: true,updated_at: DateTime.now+ (5.5/24.0))
     end
     redirect_to root_path + "/sprints/#{params[:sprint_id]}"
   end

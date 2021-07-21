@@ -1,6 +1,6 @@
-<body style="background-color:#C0C0C0;">
-    <nav class="navbar navbar-light -lighbgt justify-content-start " style="background-color: #989898;">
-        <span class="navbar-brand mb-0 h1 navbar-brand" style="color:black"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> <a style="color:black" href="<%=root_path%>"> <%= t 'Retrospective Dashboard'%></a></span>
+<body style="background-color:white;">
+    <nav class="navbar navbar-light -lighbgt justify-content-start " style="background-color: #E0FFFF;">
+        <span class="navbar-brand mb-0 h1 navbar-brand" style="color:black"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> <a style="color:black" href="<%=root_path%>">Retrospective Dashboard</a></span>
         <div class="dropdown show">
             <a class="btn btn-info dropdown-toggle mr-2" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <%=@sprint.name%>
@@ -12,12 +12,12 @@
                 <%end%>
             </div>
         </div>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createsprint"><%= t 'Add New Sprint'%></button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createsprint">Add New Sprint</button>
         <div class="modal fade" id="createsprint" tabindex="-1" role="dialog" aria-labelledby="createsprint" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createsprint"><%= t 'Add New Sprint'%></h5>
+                        <h5 class="modal-title" id="createsprint">Add New Sprint</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -46,32 +46,31 @@
         <div>
             <form method="post" action="/sprints/destroySprint/<%=@sprint.id%>" style='display: inline'>
                 <div class="col text-center">
-                    <button class="btn btn-danger" type="submit" data-confirm="Are you sure you want to delete?"><%= t 'Delete Sprint'%></i></button>
+                    <button class="btn btn-danger" type="submit" data-confirm="Are you sure you want to delete?">Delete Sprint</button>
                 </div>
             </form>
         </div>
+        <span>
+            <a href="<%=root_path%>/sprints/<%=@sprint.id%>.pdf" style="color: white" class="button btn-info ml-auto" download><i class="fa fa-download"></i>Export to PDF</a>
+        </span>
+        &nbsp&nbsp&nbsp
+        <span style="color: black">Sprint duration : <%=@sprint.created_at.to_s[0..10] %></span> &nbsp
+        <span style="color: black"> to <%=@sprint.created_at.to_date+13%> </span>
 
-        <span style="color: white">Sprint duration : <%=@sprint.created_at.to_s[0..10] %></span> &nbsp
-        <span style="color: white"> - <%=@sprint.created_at.to_date+14%> </span>
-        <%= content_tag :button,:class => "btn ml-auto" do %>
-        <%= link_to ' English', locale: :en%>
-        <%end unless current_page?(locale: :en) %>
-        <%= content_tag :button,:class => " btn ml-auto" do %>
-        <%= link_to ' French', locale: :fr%>
-        <%end unless current_page?(locale: :fr) %>
+
     </nav>
     <br>
     <div class="container">
         <!-- Renders whatwentwell,whatwentwrong,improvements,actionitem partial -->
         <div class="row">
 
-            <%= render partial: "whatwentwell", locals: {lang: I18n.locale} %>
+            <%= render partial: "whatwentwell"%>
 
-            <%= render partial: "whatwentwrong", locals: {lang: I18n.locale} %>
+            <%= render partial: "whatwentwrong"%>
 
-            <%= render partial: "improvements", locals: {lang: I18n.locale} %>
+            <%= render partial: "improvements"%>
 
-            <%= render partial: "actionitem", locals: {lang: I18n.locale} %>
+            <%= render partial: "actionitem"%>
 
         </div>
 

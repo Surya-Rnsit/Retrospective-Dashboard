@@ -1,5 +1,5 @@
  <div class="col-sm-3">
-     <h4><%= t 'What Went Well'%> <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createwell">✚</button></h4><br>
+     <h4>What Went Well<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createwell">✚</button></h4><br>
      <br>
      <div class="modal fade" id="createwell" tabindex="-1" role="dialog" aria-labelledby="createwell" aria-hidden="true">
          <div class="modal-dialog" role="document">
@@ -21,7 +21,6 @@
                          <%= form.submit({:class=> 'btn btn-primary'}) %>
                      </div>
                      <%= form.hidden_field :sprint_id, value: @sprint.id %>
-                     <%= form.hidden_field :locale, value: lang %>
                      <% end %>
                  </div>
              </div>
@@ -30,7 +29,7 @@
      <!-- Loops through each Whatwentwell post of a sprint -->
      <%@what_went_well.each do |went_well|%>
      <%went_well.what_went_wells.each do |well| %>
-     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+     <div class="card bg-info mb-3" style="max-width: 18rem;">
          <div class="card-body">
              <p class="card-text"> <%= well.body %><br></p>
          </div>
@@ -53,8 +52,7 @@
                                  <textarea class="form-control" id="body" name="body"><%= well.body %></textarea>
                                  <br />
                                  <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
-                                 <input type="hidden" id="locale" name="locale" value="<%=lang%>">
-                                 <input class="btn btn-primary btn-sm" type="submit" value="<%= t 'Update Post'%>" />
+                                 <input class="btn btn-primary btn-sm" type="submit" value="Update Post"/>
                              </form>
                          </div>
                      </div>
@@ -64,13 +62,11 @@
              <form method="post" action="/what_went_wells/destroyWhatWentWell/<%=well.id%>" style='display: inline'>
                  <button class="btn btn-danger btn-sm" type="submit" data-confirm="Are you sure you want to delete?"><i class="fa fa-trash"></i></button>
                  <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
-                 <input type="hidden" id="locale" name="locale" value="<%=lang%>">
              </form>
              <!-- Form for Like button -->
              <form method="post" action="/what_went_wells/likeWhatWentWell/<%=well.id%>" style='display: inline'>
-                 <button class="btn  btn-dark btn-sm" type="submit"><i class="fa fa-thumbs-up"></i> <%=well.likes%></button>
+                 <button class="btn  btn-grey btn-sm" type="submit"><i class="fa fa-thumbs-up"></i> <%=well.likes%></button>
                  <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
-                 <input type="hidden" id="locale" name="locale" value="<%=lang%>">
              </form>
          </div>
      </div>

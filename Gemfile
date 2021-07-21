@@ -8,7 +8,7 @@ ruby '2.6.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.6'
 # Use sqlite3 as the database for Active Record
-gem 'pg', '~> 0.18.4'
+gem 'sqlite3'
 # Use Puma as the app server
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
@@ -34,6 +34,8 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem 'rails-i18n'
+gem 'prawn'
+gem 'prawn-table', '~> 0.1.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'rdoc', '~> 4.2', '>= 4.2.2'

@@ -18,6 +18,7 @@
  .card {
     border-radius: 20px;
     font-family: 'Handlee', 'Roboto', helvetica, cursive;
+    color: black;
   }
   input[type=checkbox]:checked + label.form-check-label{
     text-decoration: line-through;
@@ -27,8 +28,9 @@
 .dropdown .dropdown-menu 
 {
   color: white;
-  background-color: #989898;
+  background-color: #0097a7;
   border-color: #b91773;
+  text-decoration-color: white ;
 }
 h1, h2, h3, h4, .sectionTitle {
   margin: 0.2em 0;
@@ -36,3 +38,6 @@ h1, h2, h3, h4, .sectionTitle {
   font-weight: bold;
 }
 
+.bg-info {
+  background-color: #F0F8FF!important;
+}
