@@ -9,7 +9,7 @@ class SprintPdf < Prawn::Document
 
       text "Retrospective Board", size: 30, style: :bold, align: :center
       move_down 5
-      text "Sprint Duration : #{@sprint.created_at.to_date} To #{@sprint.created_at.to_date+14}", size: 15, style: :bold, align: :center
+      text "Sprint Duration : #{@sprint.created_at.to_date} To #{@sprint.created_at.to_date+13}", size: 15, style: :bold, align: :center
       move_down 10
       text "#{@sprint.name}", size: 25, style: :bold, align: :center
       move_down 15
