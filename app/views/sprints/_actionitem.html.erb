@@ -1,5 +1,5 @@
 <div class="col-sm-auto">
-    <h6>&nbspAction List&nbsp<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createaction">✚</button></h6><br>
+    <h6>&nbspAction List&nbsp<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createaction">✚</button> &nbsp &nbsp &nbsp &nbsp &nbsp</h6><br>
     <div class="modal fade" id="createaction" tabindex="-1" role="dialog" aria-labelledby="createaction" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -30,16 +30,16 @@
      <!-- Loop through each action item of the sprint -->
     <%@action_items.each do |action_item|%>
     <%action_item.actionitems.each do |action| %>
-    <div class="card bg-warning mb-3" style="max-width: 12rem;">
+    <div class="card bg-warning mb-3" style="width: 12rem;">
         <div class="card-body">
              <!-- Form To Update Checkbox for Action items -->
             <form method="post" action="/action_items/updatecheckbox/<%=action.id%>" style='display: inline'>
                 <%if action.ischeck==true%>
                 <div class="form-check" data-toggle="tooltip" data-placement="right" title=<%=action.updated_at%>>
                     <input class="form-check-input" onChange="this.form.submit()" type="checkbox" id="<%=action.id%>" checked>
-                    <label class="form-check-label" for="<%=action.id%>">
+                    <p class="form-check-label" for="<%=action.id%>">
                         <%=action.body%>
-                    </label>
+                    </p>
                     <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
                 </div>
             </form>
@@ -47,9 +47,9 @@
             <form method="post" action="/action_items/updatecheckbox/<%=action.id%>" style='display: inline'>
                 <div class="form-check">
                     <input class="form-check-input" onChange="this.form.submit()" type="checkbox" id="<%=action.id%>">
-                    <label class="form-check-label" for="<%=action.id%>">
+                    <p class="form-check-label" for="<%=action.id%>">
                         <%=action.body%>
-                    </label>
+                    </p>
                     <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
                 </div>
             </form>
