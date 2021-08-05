@@ -1,5 +1,5 @@
-<div class="col-sm-3">
-    <h4>How to Improve?<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createimprove">✚</button></h4><br>
+<div class="col-sm-auto">
+    <h6>&nbsp How to Improve ?&nbsp<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createimprove">✚</button></h6><br>
     <div class="modal fade" id="createimprove" tabindex="-1" role="dialog" aria-labelledby="createimprove" aria-hidden="true">
         <div class="modal-dialog" role="document">
          <!-- Form to create Improvements post-->
@@ -30,7 +30,7 @@
      <!-- Loop through all improvements of the sprint -->
     <%@improvements.each do |improvement|%>
     <%improvement.improvements.each do |improve| %>
-    <div class="card  bg-info mb-3" style="max-width: 18rem;">
+    <div class="card  bg-primary mb-3" style="max-width: 12rem;">
         <div class="card-body">
             <p class="card-text"> <%= improve.body %><br></p>
         </div>
@@ -73,5 +73,7 @@
     </div>
     <% end %>
     <% end %>
+    <br>
+    <br>
 </div>
 

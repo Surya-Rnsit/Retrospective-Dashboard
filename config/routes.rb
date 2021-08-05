@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     post '/createWhatWentWrong', to: 'what_went_wrongs#create'
     post '/createImprovements', to: 'improvements#create'
     post '/createActionitems', to: 'action_items#create'
+    post '/createCompletedStories', to: 'completed_stories#create'
     post '/createSprint', to: 'sprints#create'
 
     get '/what_went_wells/updateWhatWentWell/:id', to: 'what_went_wells#update'
@@ -18,6 +19,9 @@ Rails.application.routes.draw do
 
     get '/improvements/updateImprovements/:id', to: 'improvements#update'
     patch '/improvements/updateImprovements/:id', to: 'improvements#update'
+    
+    get '/completedstories/updatecompletedstories/:id', to: 'completed_stories#update'
+    patch '/completedstories/updatecompletedstories/:id', to: 'completed_stories#update'
 
     get '/action_items/updateactionitems/:id', to: 'action_items#update'
     patch '/action_items/updateactionitems/:id', to: 'action_items#update'
@@ -31,6 +35,7 @@ Rails.application.routes.draw do
     post '/what_went_wrongs/destroyWhatWentWrong/:id', to: 'what_went_wrongs#destroy'
     post '/improvements/destroyImprovements/:id', to: 'improvements#destroy'
     post '/action_items/destroyactionitems/:id', to: 'action_items#destroy'
+    post '/completedstories/destroycompletedstories/:id', to: 'completed_stories#destroy'
 
     post 'sprints/destroySprint/:id', to: 'sprints#destroy'
 

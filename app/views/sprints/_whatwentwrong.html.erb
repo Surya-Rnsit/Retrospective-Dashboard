@@ -1,5 +1,5 @@
-<div class="col-sm-3">
-    <h4>What Went Wrong<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createwrong">✚</button></h4><br>
+<div class="col-sm-auto">
+    <h6>&nbspWhat Went Wrong?&nbsp<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createwrong">✚</button></h6><br>
      <!-- Form to create whatwentwrong -->
     <div class="modal fade" id="createwrong" tabindex="-1" role="dialog" aria-labelledby="createwrong" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -30,7 +30,7 @@
      <!-- Loop through each whatwent wrong of the sprint -->
     <%@what_went_wrong.each do |went_wrong|%>
     <%went_wrong.what_went_wrongs.each do |wrong| %>
-    <div class="card bg-info mb-3" style="max-width: 18rem;">
+    <div class="card bg-dark mb-3" style="max-width: 12rem;">
         <div class="card-body ">
             <p class="card-text"> <%= wrong.body %><br></p>
         </div>

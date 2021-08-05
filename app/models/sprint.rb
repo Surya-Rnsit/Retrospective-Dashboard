@@ -10,4 +10,5 @@ class Sprint < ApplicationRecord
   has_many :improvements, dependent: :destroy
   has_many :what_went_wells, dependent: :destroy
   has_many :what_went_wrongs, dependent: :destroy
+  has_many :completed_stories, dependent: :destroy
 end

@@ -1,5 +1,5 @@
 <body style="background-color:white;">
-    <nav class="navbar navbar-light -lighbgt justify-content-start " style="background-color: #E0FFFF;">
+    <nav class="navbar navbar-light -lighbgt justify-content-start " style="background-color: #b7d7e8;">
         <span class="navbar-brand mb-0 h1 navbar-brand" style="color:black"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> <a style="color:black" href="<%=root_path%>">Retrospective Dashboard</a></span>
         <div class="dropdown show">
             <a class="btn btn-info dropdown-toggle mr-2" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,6 +71,9 @@
             <%= render partial: "improvements"%>
 
             <%= render partial: "actionitem"%>
+
+            
+            <%= render partial: "completedstory"%>
 
         </div>
 

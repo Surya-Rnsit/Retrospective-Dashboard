@@ -24,6 +24,7 @@ class SprintsController < ApplicationController
     @action_items = Sprint.includes(:actionitems).where(actionitems: { sprint_id: @sprint.id })
     @what_went_wrong = Sprint.includes(:what_went_wrongs).where(what_went_wrongs: { sprint_id: @sprint.id })
     @improvements = Sprint.includes(:improvements).where(improvements: { sprint_id: @sprint.id })
+    @completed_story = Sprint.includes(:completed_stories).where(completed_stories: { sprint_id: @sprint.id })
     
     respond_to do |format|
       format.html

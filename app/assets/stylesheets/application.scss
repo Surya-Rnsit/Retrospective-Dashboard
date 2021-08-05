@@ -16,9 +16,9 @@
  
  @import "bootstrap";
  .card {
-    border-radius: 20px;
-    font-family: 'Handlee', 'Roboto', helvetica, cursive;
+    font-family: 'Handlee', 'Roboto', helvetica;
     color: black;
+    font-size: 13px;
   }
   input[type=checkbox]:checked + label.form-check-label{
     text-decoration: line-through;
@@ -39,5 +39,31 @@ h1, h2, h3, h4, .sectionTitle {
 }
 
 .bg-info {
-  background-color: #F0F8FF!important;
+  background-color: #ccf5ff!important;
+}
+
+.bg-light {
+  background-color: #c0ded9!important;
+}
+.bg-dark{
+  background-color: #e4d1d1!important;
+}
+.bg-primary{
+  background-color: #fbefcc!important;
+}
+
+.bg-warning{
+  background-color: #c8c3cc!important;
+}
+
+.btn-danger{
+  background-color: #e06377!important;
+}
+
+.btn-primary{
+  background-color: #89CFF0!important;
+}
+
+.btn-secondary{
+  background-color: #A0A0A0!important;
 }

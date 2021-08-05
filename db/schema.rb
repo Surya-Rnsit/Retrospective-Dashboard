@@ -10,46 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_616_102_611) do
-  create_table 'actionitems', force: :cascade do |t|
-    t.text 'body'
-    t.boolean 'ischeck', default: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.integer 'sprint_id'
-    t.index ['sprint_id'], name: 'index_actionitems_on_sprint_id'
+ActiveRecord::Schema.define(version: 2021_08_05_095026) do
+
+  create_table "actionitems", force: :cascade do |t|
+    t.text "body"
+    t.boolean "ischeck", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "sprint_id"
+    t.index ["sprint_id"], name: "index_actionitems_on_sprint_id"
   end
 
-  create_table 'improvements', force: :cascade do |t|
-    t.text 'body'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.integer 'likes', default: 0
-    t.integer 'sprint_id'
-    t.index ['sprint_id'], name: 'index_improvements_on_sprint_id'
+  create_table "completed_stories", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "sprint_id"
+    t.index ["sprint_id"], name: "index_completed_stories_on_sprint_id"
   end
 
-  create_table 'sprints', force: :cascade do |t|
-    t.string 'name'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "improvements", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "likes", default: 0
+    t.integer "sprint_id"
+    t.index ["sprint_id"], name: "index_improvements_on_sprint_id"
   end
 
-  create_table 'what_went_wells', force: :cascade do |t|
-    t.text 'body'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.integer 'likes', default: 0
-    t.integer 'sprint_id'
-    t.index ['sprint_id'], name: 'index_what_went_wells_on_sprint_id'
+  create_table "sprints", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'what_went_wrongs', force: :cascade do |t|
-    t.text 'body'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.integer 'likes', default: 0
-    t.integer 'sprint_id'
-    t.index ['sprint_id'], name: 'index_what_went_wrongs_on_sprint_id'
+  create_table "what_went_wells", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "likes", default: 0
+    t.integer "sprint_id"
+    t.index ["sprint_id"], name: "index_what_went_wells_on_sprint_id"
   end
+
+  create_table "what_went_wrongs", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "likes", default: 0
+    t.integer "sprint_id"
+    t.index ["sprint_id"], name: "index_what_went_wrongs_on_sprint_id"
+  end
+
 end

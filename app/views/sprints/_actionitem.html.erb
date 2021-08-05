@@ -1,5 +1,5 @@
-<div class="col-sm-3">
-    <h4>Action List <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createaction">✚</button></h4><br>
+<div class="col-sm-auto">
+    <h6>&nbspAction List&nbsp<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#createaction">✚</button></h6><br>
     <div class="modal fade" id="createaction" tabindex="-1" role="dialog" aria-labelledby="createaction" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -30,7 +30,7 @@
      <!-- Loop through each action item of the sprint -->
     <%@action_items.each do |action_item|%>
     <%action_item.actionitems.each do |action| %>
-    <div class="card bg-info mb-3" style="max-width: 18rem;">
+    <div class="card bg-warning mb-3" style="max-width: 12rem;">
         <div class="card-body">
              <!-- Form To Update Checkbox for Action items -->
             <form method="post" action="/action_items/updatecheckbox/<%=action.id%>" style='display: inline'>
@@ -53,9 +53,10 @@
                     <input type="hidden" id="sprint_id" name="sprint_id" value="<%=@sprint.id%>">
                 </div>
             </form>
+            <br>
              <!-- Dropdwn List For Sprints -->
             <div class="dropdown show">
-                <a class="btn btn-secondary dropdown-toggle btn-sm d-inline" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="btn btn-secondary dropdown-toggle btn-sm d-inline " href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Move To
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu">
@@ -72,7 +73,7 @@
                 </div>
             </div>
             <%end%>
-            <br>
+    
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ActionItems<%= action.id%>">
                 <i class="fa fa-edit"> </i>
             </button>
@@ -104,8 +105,7 @@
                 <button class="btn btn-danger btn-sm" type="submit" data-confirm="Are you sure you want to delete?"><i class="fa fa-trash"></i></button><br>
             </form>
         </div>
-        <% end %>
-        <% end %>
     </div>
+    <% end %>
+    <% end %>
 </div>
-
