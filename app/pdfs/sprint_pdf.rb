@@ -6,6 +6,7 @@ class SprintPdf < Prawn::Document
       @action_items=@sprint.actionitems.all
       @what_went_wrong=@sprint.what_went_wrongs.all
       @improvements=@sprint.improvements.all
+      @completed_story=@sprint.completed_stories.all
 
       text "Retrospective Board", size: 30, style: :bold, align: :center
       move_down 5
@@ -25,6 +26,10 @@ class SprintPdf < Prawn::Document
       move_down 15
       text "How can we Improve", size: 20, style: :bold
       improvement_items
+
+      move_down 15
+      text "Demo of completed stories", size: 20, style: :bold
+      completed_story_items
 
       move_down 15
       text "Action List", size: 20, style: :bold
@@ -80,6 +85,23 @@ class SprintPdf < Prawn::Document
       [["How can we improve", "Likes"]] +
       @improvements.map do |improvements|
         [improvements.body, improvements.likes]
+      end  
+    end
+
+    def completed_story_items
+      move_down 15
+      table completed_story_items_rows do
+        row(0).font_style = :bold
+        self.row_colors = ["DDDDDD", "FFFFFF"]
+        self.header = true
+        self.column_widths = [400, 75]
+      end
+    end
+
+    def completed_story_items_rows 
+      [["Demo of completed stories"]] +
+      @completed_story.map do |completed_story|
+        [completed_story.body]
       end  
     end
 

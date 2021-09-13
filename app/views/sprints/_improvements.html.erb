@@ -26,6 +26,14 @@
             </div>
         </div>
     </div>
+     <script>
+        $('#createimprove').on('hidden.bs.modal', function (e) {
+        $(this)
+            .find("textarea")
+            .val('')
+            .end();
+        })
+     </script>
     <br>
      <!-- Loop through all improvements of the sprint -->
     <%@improvements.each do |improvement|%>

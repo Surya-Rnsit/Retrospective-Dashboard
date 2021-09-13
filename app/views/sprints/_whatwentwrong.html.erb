@@ -26,6 +26,14 @@
             </div>
         </div>
     </div>
+    <script>
+        $('#createwrong').on('hidden.bs.modal', function (e) {
+        $(this)
+            .find("textarea")
+            .val('')
+            .end();
+        })
+     </script>
     <br>
      <!-- Loop through each whatwent wrong of the sprint -->
     <%@what_went_wrong.each do |went_wrong|%>

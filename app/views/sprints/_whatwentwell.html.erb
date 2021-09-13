@@ -25,7 +25,16 @@
                  </div>
              </div>
          </div>
+
      </div>
+     <script>
+        $('#createwell').on('hidden.bs.modal', function (e) {
+        $(this)
+            .find("textarea")
+            .val('')
+            .end();
+        })
+     </script>
      <!-- Loops through each Whatwentwell post of a sprint -->
      <%@what_went_well.each do |went_well|%>
      <%went_well.what_went_wells.each do |well| %>
